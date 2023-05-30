@@ -5,7 +5,7 @@ info:
   description: Get the nearest city from your IP
 
 paths:
-  /locate/:
+  /locate:
     parameters:
       - name: locate
         description: Get the details from the IP
