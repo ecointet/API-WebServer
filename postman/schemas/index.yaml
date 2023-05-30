@@ -1,0 +1,71 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Locate your IP'
+  description: Get the nearest city from your IP
+
+paths:
+  /locate/:
+    parameters:
+      - name: locate
+        description: Get the details from the IP
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/SpacecraftId'
+    get:
+      summary: Get Details
+      responses:
+        '200':
+          description: The result are found from the `IP`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spacecraft'
+        404:
+          description: No city found for the provided `IP`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    country:
+      description: The full country name
+      type: string
+    regionName: 
+      description: The Region name
+      type: string
+    city: 
+      description: Thename of the city
+      type: string
+    ip: 
+      description: The IP Used
+      type: string
+    photo: 
+      description: The photo ready to be used from Google
+      type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: A human readable error message
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+servers:
+  - url: https://api.gcp.cointet.com
+    description: Production server (uses live data)
+security:
+  - ApiKey: []
