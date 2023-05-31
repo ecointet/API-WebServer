@@ -1,65 +1,64 @@
-openapi: '3.0.0'
+---
+openapi: 3.0.3
 info:
-  version: '1.0.0'
-  title: 'Locate your IP'
-  description: Get the nearest city from your IP
-
-paths:
-  /locate/:
-    parameters:
-      - name: locate
-        description: Get the details from the IP. Includes a photo.
-        in: query
-        required: true
-        schema:
-          $ref: '#/components/schemas/locate'
-    get:
-      summary: Get Details
-      responses:
-        '200':
-          description: The result are found from the `IP`
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/locate'
-        404:
-          description: No city found for the provided `IP`
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-components:
-  schemas:
-    country:
-      description: The full country name
-      type: string
-    regionName: 
-      description: The Region name
-      type: string
-    city: 
-      description: Thename of the city
-      type: string
-    ip: 
-      description: The IP Used
-      type: string
-    photo: 
-      description: The photo ready to be used from Google
-      type: string
-    Error:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          description: A human readable error message
-          type: string
-  securitySchemes:
-    ApiKey:
-      type: apiKey
-      in: header
-      name: X-Api-Key
+  title: Get information about a Public IP
+  version: 1.0.0
+  description: From a simple public IP you can get geographical information such as the City and Country
+security:
+  - BasicAuth: []
 servers:
   - url: https://api.gcp.cointet.com
     description: Production server (uses live data)
-security:
-  - ApiKey: []
+paths:
+  /locate:
+    parameters:
+      - name: ip
+        description: A public IP
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/ip'
+    get:
+      summary: Get all the information about a public IP
+      description: |
+        Upon successful execution, returns a all known information about a public IP. 
+
+        The API will also give a photo to illustrate the nearest city found.
+
+      operationId: locate
+      responses:
+        "200":
+          description: "Public IP Information found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/result'
+        "500":
+          description: "Generic 500 error"
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    ip:
+      type: string
+      default: "35.203.250.229"
+    result:
+      type: object
+      properties:
+        country:
+          type: string
+          example: "United States"
+        regionName:
+          type: string
+          example: "California"
+        city:
+          type: string
+          example: "Mountain View"
+        ip:
+          type: string
+          example: "35.203.250.229"
+        photo:
+          type: string
+          example: "https://maps.googleapis.com/maps/api/place/photo?photoreference=AZose0lsU5ASw_sxeDjZihmbM0JcGOn2IM5s9EZkA7n6ZgpWqQNSQqdRqwxUS-pxXmk1PvD83iYi6XEV9SgefPV0AISw0dkLUfV4ynVVwbrFiKOPA_XcVgPWuvMgSyagLJX-6s2T5sCeBgCrGuv7x2TPJPS23qv6BvJMIVKAaZQ2NlbeNQO4&key=AIzaSyDghQDtfne8baWwQNZcua1R7FG6b_dn9jE&maxwidth=2500"

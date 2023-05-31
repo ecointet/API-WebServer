@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "a65ec183-c191-40f2-86ec-68ebc82bdc2e",
+		"name": "locate",
+		"description": "From a simple public IP you can get geographical information such as the City and Country",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27516587-a65ec183-c191-40f2-86ec-68ebc82bdc2e"
+	},
+	"item": [
+		{
+			"name": "locate",
+			"item": [
+				{
+					"name": "Get all the information about a public IP",
+					"id": "3e77e06b-a2f0-4a2d-9680-f252069b1abc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/locate/?ip=35.203.250.229",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"locate",
+								""
+							],
+							"query": [
+								{
+									"key": "ip",
+									"value": "35.203.250.229",
+									"description": "(Required) A public IP"
+								}
+							]
+						},
+						"description": "Upon successful execution, returns a all known information about a public IP. \n\nThe API will also give a photo to illustrate the nearest city found.\n"
+					},
+					"response": [
+						{
+							"id": "170ac43c-7142-4515-879d-bc6fc5d218ca",
+							"name": "Public IP Information found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/locate?ip=35.203.250.229",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locate"
+									],
+									"query": [
+										{
+											"description": "(Required) A public IP",
+											"key": "ip",
+											"value": "35.203.250.229"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"country\": \"<string>\",\n  \"regionName\": \"<string>\",\n  \"city\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"photo\": \"<string>\"\n}"
+						},
+						{
+							"id": "a5663655-ec4d-4ec5-bbf9-840ae185c30d",
+							"name": "Generic 500 error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/locate?ip=35.203.250.229",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locate"
+									],
+									"query": [
+										{
+											"description": "(Required) A public IP",
+											"key": "ip",
+											"value": "35.203.250.229"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "c99c9bc4-c624-49ff-83b3-b25ef78e7344"
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{basicAuthUsername}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{basicAuthPassword}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "f3485da4-1666-4e5f-9521-b309db00b436",
+			"key": "baseUrl",
+			"value": "https://api.gcp.cointet.com"
+		}
+	]
+}
