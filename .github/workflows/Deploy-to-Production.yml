@@ -1,3 +1,26 @@
+name: Deploy to Production (with API Testing)
+on: push
+
+env:
+  PROJECT_ID: kubernetes-152112 # TODO: update Google Cloud project id
+  SERVICE: api-webserver # TODO: update Cloud Run service name
+  REGION: europe-west1 # TODO: update Cloud Run service region
+
+jobs:
+  automated-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Run API tests
+        run: |
+          # Lint your API using Postman CLI
+          postman api lint 845d2462-6ab4-441e-a5c6-977dda179458 --integration-id 141498
+
 # This workflow will deploy source code on Cloud Run when a commit is pushed to the "main" branch
 #
 # Overview:
@@ -44,19 +67,8 @@
 #   Cloud Run builds from source        - https://cloud.google.com/run/docs/deploying-source-code
 #   Principle of least privilege        - https://cloud.google.com/blog/products/identity-security/dont-get-pwned-practicing-the-principle-of-least-privilege
 
-name: Deploy to Cloud Run from Source
-
-on:
-  push:
-    branches: [ "main" ]
-
-env:
-  PROJECT_ID: kubernetes-152112 # TODO: update Google Cloud project id
-  SERVICE: api-webserver # TODO: update Cloud Run service name
-  REGION: europe-west1 # TODO: update Cloud Run service region
-
-jobs:
   deploy:
+    needs: automated-api-tests
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
       contents: 'read'
