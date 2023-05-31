@@ -1,5 +1,4 @@
 RewriteEngine on 
 Options +FollowSymlinks
 RewriteBase /
-
-RewriteRule ^locate?ip=(.*) locate/index.php?ip=$1 [R]
+Redirect /api/data /test/index.html
