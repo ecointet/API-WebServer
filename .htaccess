@@ -1,4 +1,0 @@
-RewriteEngine on 
-Options +FollowSymlinks
-RewriteBase /
-Redirect /api/data https://api.gcp.cointet/test/index.html
