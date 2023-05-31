@@ -61,4 +61,4 @@ components:
           example: "35.203.250.229"
         photo:
           type: string
-          example: "https://maps.googleapis.com/maps/api/place/photo?photoreference=AZose0lsU5ASw_sxeDjZihmbM0JcGOn2IM5s9EZkA7n6ZgpWqQNSQqdRqwxUS-pxXmk1PvD83iYi6XEV9SgefPV0AISw0dkLUfV4ynVVwbrFiKOPA_XcVgPWuvMgSyagLJX-6s2T5sCeBgCrGuv7x2TPJPS23qv6BvJMIVKAaZQ2NlbeNQO4&key=AIzaSyDghQDtfne8baWwQNZcua1R7FG6b_dn9jE&maxwidth=2500"
+          example: "https://maps.googleapis.com/maps/api/place/photo"
