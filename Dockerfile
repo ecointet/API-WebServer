@@ -28,8 +28,9 @@ COPY . ./
 
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
+#RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+RUN cp apache.conf /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-RUN sed -i 's/#ServerName www.example.com/AllowOverride All/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 RUN a2enmod rewrite
 
 # Configure PHP for development.
