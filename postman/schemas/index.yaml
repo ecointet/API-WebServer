@@ -5,14 +5,14 @@ info:
   description: Get the nearest city from your IP
 
 paths:
-  /locate:
+  /locate/:
     parameters:
       - name: locate
-        description: Get the details from the IP
+        description: Get the details from the IP. Includes a photo.
         in: query
         required: true
         schema:
-          $ref: '#/components/schemas/SpacecraftId'
+          $ref: '#/components/schemas/locate'
     get:
       summary: Get Details
       responses:
@@ -21,15 +21,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Spacecraft'
+                $ref: '#/components/schemas/locate'
         404:
           description: No city found for the provided `IP`
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
           content:
             application/json:
               schema:
