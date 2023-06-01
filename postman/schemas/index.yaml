@@ -11,54 +11,45 @@ servers:
     description: Production server (uses live data)
 paths:
   /locate:
-    parameters:
-      - name: ip
-        description: A public IP
-        in: query
-        required: true
-        schema:
-          $ref: '#/components/schemas/ip'
     get:
-      summary: Get all the information about a public IP
+      summary: Locate an IP
       description: |
         Upon successful execution, returns a all known information about a public IP. 
-
         The API will also give a photo to illustrate the nearest city found.
-
-      operationId: locate
+      parameters:
+        - in: query
+          name: ip
+          description: Public IP to locate
+          schema:
+            type: string
       responses:
         "200":
-          description: "Public IP Information found"
+          description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/result'
-        "500":
-          description: "Generic 500 error"
+                $ref: '#/components/schemas/locate'
 components:
   securitySchemes:
     BasicAuth:
       type: http
       scheme: basic
   schemas:
-    ip:
-      type: string
-      default: "35.203.250.229"
-    result:
+    locate:
       type: object
       properties:
         country:
           type: string
-          example: "United States"
+          example: "Spain"
         regionName:
           type: string
-          example: "California"
+          example: "Andalusia"
         city:
           type: string
-          example: "Mountain View"
+          example: "Marbella"
         ip:
           type: string
-          example: "35.203.250.229"
+          example: "78.80.98.56"
         photo:
           type: string
-          example: "https://maps.googleapis.com/maps/api/place/photo"
+          example: "https://google.com/image"
