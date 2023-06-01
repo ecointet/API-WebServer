@@ -13,7 +13,9 @@ function cityFromIP($ip)
     $n_json['city'] = $json->city;
     $n_json['ip'] = $json->query;
 
+    if (!getenv("GKEY")) die("Incorrect Google API KEY");
     $googleAPI = getenv("GKEY");
+    
 
     if ($json->city) // Get Photo Ref
     {

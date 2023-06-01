@@ -1,0 +1,457 @@
+---
+openapi: 3.0.3
+info:
+  title: Vehicle Status
+  version: 1.0.0
+  description: API for HW 2.322
+security:
+  - BasicAuth: []
+servers:
+  - url: https://api.cars.com
+    description: Production server (uses live data)
+  - url: https://dev.cars.com:8080
+    description: Dev server (uses test data)
+paths:
+  /status:
+    get:
+      summary: Complete Status
+      description: |
+        Upon successful execution, returns a complete status update encompassing all connected elements. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+
+      operationId: completeStatus
+      responses:
+        "200":
+          description: "Status retrived successfully"
+        "500":
+          description: "Generic 500 error"
+  /status/battery:
+    get:
+      tags:
+        - Battery
+      summary: Battery
+      description: |
+        Returns a status and health report for all connected battery elements (includes EV batteries as well). 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+
+      operationId: battery
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cca:
+                    type: number
+                    example: 600
+                  charging:
+                    type: boolean
+                    example: true
+                  health:
+                    type: string
+                    example: good
+                  install:
+                    type: string
+                    example: 2020-02-02
+                  overvolt:
+                    type: boolean
+                    example: false
+                  type:
+                    type: string
+                    example: AGM
+                  voltage:
+                    type: number
+                    example: 14.2
+              examples:
+                Success:
+                  value:
+                    cca: 600
+                    charging: true
+                    health: good
+                    install: 2020-02-02
+                    overvolt: false
+                    type: AGM
+                    voltage: 14.2
+        "500":
+          description: "Internal server error"
+  /status/doors:
+    get:
+      tags:
+        - Doors
+      summary: Doors
+      description: |
+        Returns a status report indicating which, if any doors are open at the time of the request. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: doors
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  front:
+                    type: object
+                    properties:
+                      left:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: true
+                      right:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: true
+                  rear:
+                    type: object
+                    properties:
+                      left:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: false
+                      right:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: false
+              examples:
+                Success:
+                  value:
+                    front:
+                      left:
+                        open: true
+                      right:
+                        open: true
+                    rear:
+                      left:
+                        open: false
+                      right:
+                        open: false
+        "500":
+          description: "Internal server error"
+  /status/engine:
+    get:
+      tags:
+        - Engine
+      summary: Engine
+      description: |
+        Returns a complete status and health update for the engine. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: engine
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coolantTemp:
+                    type: number
+                    example: 92
+                  oilPressure:
+                    type: number
+                    example: 4
+                  oilTemp:
+                    type: number
+                    example: 80
+                  rpm:
+                    type: number
+                    example: 800
+                  running:
+                    type: boolean
+                    example: true
+              examples:
+                Success:
+                  value:
+                    coolantTemp: 92
+                    oilPressure: 4
+                    oilTemp: 80
+                    rpm: 800
+                    running: true
+        "500":
+          description: "Internal server error"
+  /status/fuel:
+    get:
+      tags:
+        - Fuel
+      summary: Fuel
+      description: |
+        Returns a status update for the fuel tank. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: fuel
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ethanolContent:
+                    type: number
+                    example: 5
+                  gas:
+                    type: boolean
+                    example: true
+                  level:
+                    type: number
+                    example: 90
+                  pressure:
+                    type: number
+                    example: 40
+              examples:
+                Success:
+                  value:
+                    ethanolContent: 5
+                    gas: true
+                    level: 90
+                    pressure: 40
+        "500":
+          description: "Internal server error"
+  /status/interior:
+    get:
+      tags:
+        - Interior
+      summary: Interior
+      description: |
+        Returns a complete status update for elements affecting the car cabin. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: interior
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alarm:
+                    type: string
+                    example: "off"
+                  gear:
+                    type: string
+                    example: p
+                  lights:
+                    type: string
+                    example: "on"
+                  temp:
+                    type: number
+                    example: 68
+              examples:
+                Success:
+                  value:
+                    alarm: "off"
+                    gear: p
+                    lights: "on"
+                    temp: 68
+        "500":
+          description: "Internal server error"
+  /status/lights:
+    get:
+      tags:
+        - Lights
+      summary: Lights
+      description: |
+        Returns a status update for both internal and external car lights. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: lights
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  brights:
+                    type: boolean
+                    example: false
+                  daytime:
+                    type: boolean
+                    example: true
+                  hazards:
+                    type: boolean
+                    example: true
+                  leftSignal:
+                    type: boolean
+                    example: true
+                  main:
+                    type: boolean
+                    example: false
+                  rightSignal:
+                    type: boolean
+                    example: true
+                  sidelight:
+                    type: boolean
+                    example: false
+              examples:
+                Success:
+                  value:
+                    brights: false
+                    daytime: true
+                    hazards: true
+                    leftSignal: true
+                    main: false
+                    rightSignal: true
+                    sidelight: false
+        "500":
+          description: "Internal server error"
+  /status/odometer:
+    get:
+      tags:
+        - Odometer
+      summary: Odometer
+      description: |
+        Returns a the current odometer reading in both km and miles. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: odometer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  km:
+                    type: number
+                    example: 100000
+                  miles:
+                    type: number
+                    example: 62000
+              examples:
+                Success:
+                  value:
+                    km: 100000
+                    miles: 62000#
+        "500":
+          description: "Internal server error"
+  /status/roof:
+    get:
+      tags:
+        - Roof
+      summary: Roof
+      description: |
+        Returns a status update for all connected roof elements. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+      operationId: roof
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  convertible:
+                    type: string
+                    example: up
+                  sunroofOpen:
+                    type: boolean
+                    example: false
+              examples:
+                Success:
+                  value:
+                    convertible: up
+                    sunroof: ~
+        "500":
+          description: "Internal server error"
+  /status/windows:
+    get:
+      tags:
+        - Windows
+      summary: Windows
+      description: |
+        Returns a status update for all connected window elements. 
+
+        As status checks are core features of the PM connected car experience, this feature is allowed by default in the customer account settings. However, users do have the option to revoke remote status reporting access to APIs and rely only on the car dashboard indicators. Thus, developers should check for a successful response before continuing with any further workflows.
+
+      operationId: windows
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  front:
+                    type: object
+                    properties:
+                      left:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: true
+                      right:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: true
+                  rear:
+                    type: object
+                    properties:
+                      left:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: false
+                      right:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                            example: false
+              examples:
+                Success:
+                  value:
+                    front:
+                      left:
+                        open: true
+                      right:
+                        open: true
+                    rear:
+                      left:
+                        open: false
+                      right:
+                        open: false
+        "500":
+          description: "Internal server error"
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+tags:
+  - name: Battery
+  - name: Doors
+  - name: Engine
+  - name: Fuel
+  - name: Interior
+  - name: Lights
+  - name: Roof
+  - name: Odometer
+  - name: Windows

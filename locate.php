@@ -1,8 +1,8 @@
 <?php
 //A Fun API WebServer
 //by @ecointet (twitter)
-require "../tools.php";
-require "../functions.php";
+require "src/tools.php";
+require "src/functions.php";
 ?>
 
 <?php
