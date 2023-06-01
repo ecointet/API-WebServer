@@ -10,7 +10,7 @@ servers:
   - url: https://api.gcp.cointet.com
     description: Production server (uses live data)
 paths:
-  /locate:
+  /locate/:
     get:
       summary: Locate an IP
       description: |
