@@ -20,6 +20,16 @@ jobs:
         run: |
           # Lint your API using Postman CLI
           postman api lint 845d2462-6ab4-441e-a5c6-977dda179458 --integration-id 141498
+  
+  
+  notify-confluence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Send the notification
+        run:  echo "Send a notification to Confluence"
+      - name: Close the message
+        run:  echo "Message closed"
 
 # This workflow will deploy source code on Cloud Run when a commit is pushed to the "main" branch
 #
