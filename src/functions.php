@@ -5,9 +5,11 @@
 function cityFromIP($ip)
 {
    // if ($ip == null) $ip = "127.0.0.1";
+   //REMOVE IP IF NOT GOOD
+   if (strlen($ip) <= 6) $ip = "";
     $data = getRemoteContent("http://ip-api.com/json/".$ip); //Get City
     $json = json_decode($data);
-    if (!isset($json->country)) return error("IP details not found", $ip);
+    if (!isset($json->country)) return error("IP details not found!", $ip);
 
     $n_json['country'] = $json->country;
     $n_json['regionName'] = $json->regionName;
@@ -28,6 +30,55 @@ function cityFromIP($ip)
     $n_json['photo'] = "https://maps.googleapis.com/maps/api/place/photo?photoreference=".$photo_ref."&key=".$googleAPI."&maxwidth=2500";
 
     return(json_encode($n_json));
+}
+
+function DetailsFromCountry($country)
+{
+    $data = getRemoteContent("https://restcountries.com/v3.1/name/".$country); //Get Details from
+    $json = json_decode($data);
+    //print_r($json);
+    if (!isset($json[0]->name->official)) return error("Country details not found", $country);
+
+   $n_json['country'] = $json[0]->name->common;
+   $n_json['country_name'] = $json[0]->name->official;
+   $n_json['code'] = $json[0]->cca2;
+   $n_json['flag'] = $json[0]->flag;
+   $n_json['flag_img'] = $json[0]->flags->png;
+   $n_json['flag_alt'] = $json[0]->flags->alt;
+    
+    return(json_encode($n_json));
+}
+
+function ChatGPT($city)
+{
+    if (!getenv("OPENAI")) die("Incorrect OPEN API KEY");
+    $openaiAPI = getenv("OPENAI");
+
+    $headers    = [];
+    $headers[]  = 'Content-Type: application/json';
+    $headers[]   = 'Authorization: Bearer '.$openaiAPI;
+
+    $question = "In one sentence, give me some information about the city: ".$city;
+
+    $content= '{
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": "'.$question.'"}],
+        "max_tokens": 250,
+        "temperature": 0.7
+      }';
+
+    $data = getRemoteContent("https://api.openai.com/v1/chat/completions", $headers, $content); //Get Details from
+    $json = json_decode($data);
+    //print_r($json);
+    
+    if (!isset($json->id)) return error("City details not found from ChatGPT", $city);
+
+   $n_json['id'] = $json->id;
+   $n_json['model'] = $json->model;
+   $n_json['answer'] = $json->choices[0]->message->content;
+   $n_json['question'] = $question;
+    
+   return(json_encode($n_json));
 }
 
 function error($data, $ip)

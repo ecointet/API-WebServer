@@ -2,4 +2,4 @@ RewriteEngine ON
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]*)/([^/]*)$ $1.php?param=$2 [L]
+RewriteRule ^([^/]*)/([^/]*)$ index.php?func=$1&param=$2 [L]
