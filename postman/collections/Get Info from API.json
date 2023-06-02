@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "65836149-868e-4bac-9209-fb488fd2b409",
+		"name": "Get Info from API",
+		"description": "From a simple public IP you can get geographical information such as the City and Country",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27516587-65836149-868e-4bac-9209-fb488fd2b409"
+	},
+	"item": [
+		{
+			"name": "locate",
+			"item": [
+				{
+					"name": "{ip}",
+					"item": [
+						{
+							"name": "Locate an IP",
+							"id": "b9970553-c6e7-4059-aa61-1be859f3067d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/locate/:ip",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locate",
+										":ip"
+									],
+									"variable": [
+										{
+											"key": "ip",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Upon successful execution, returns a all known information about a public IP. \nThe API will also give a photo to illustrate the nearest city found.\n"
+							},
+							"response": [
+								{
+									"id": "a404ce9a-43e5-4813-8a37-a4eb8cd10627",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/locate/:ip",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"locate",
+												":ip"
+											],
+											"variable": [
+												{
+													"key": "ip"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"country\": \"<string>\",\n  \"regionName\": \"<string>\",\n  \"city\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"photo\": \"<string>\"\n}"
+								},
+								{
+									"id": "ad3e5b65-a419-4ca8-b6bd-1ccd0d7782be",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/locate/:ip",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"locate",
+												":ip"
+											],
+											"variable": [
+												{
+													"key": "ip"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"country\": \"<string>\",\n  \"regionName\": \"<string>\",\n  \"city\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"photo\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "c459ae36-0edf-4402-b9bf-0cd482060db0"
+				}
+			],
+			"id": "c68ddf00-9d60-41fd-97a6-91dddeee4a7a"
+		},
+		{
+			"name": "details",
+			"item": [
+				{
+					"name": "{country}",
+					"item": [
+						{
+							"name": "Get Country Details",
+							"id": "d8e35b13-9364-48ca-a986-9f492e3ac257",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/details/:country",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"details",
+										":country"
+									],
+									"variable": [
+										{
+											"key": "country",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Useful to check if a country exists, and get some details about it\n"
+							},
+							"response": [
+								{
+									"id": "6b0e8bd2-f298-4507-a33f-9268edab5ab9",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/details/:country",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"details",
+												":country"
+											],
+											"variable": [
+												{
+													"key": "country"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"country\": \"<string>\",\n  \"details\": \"<string>\"\n}"
+								},
+								{
+									"id": "4dc242d6-7e72-4d8f-82dc-ceb373dac48b",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/details/:country",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"details",
+												":country"
+											],
+											"variable": [
+												{
+													"key": "country"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "3dc686e5-9cec-4dec-9196-361dbe98a36f"
+				}
+			],
+			"id": "1682dc3c-8383-41a9-b9b8-80cbac626ee9"
+		},
+		{
+			"name": "chatgpt",
+			"item": [
+				{
+					"name": "{city}",
+					"item": [
+						{
+							"name": "Get an AI generated sentence about the city",
+							"id": "306f819a-a2b7-4949-a6ab-11e300ac2458",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/chatgpt/:city",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatgpt",
+										":city"
+									],
+									"variable": [
+										{
+											"key": "city",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "One short sentence to describe the city requested\n"
+							},
+							"response": [
+								{
+									"id": "f2d71de4-2baf-4bf8-9bb4-ec7700bf6a69",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/chatgpt/:city",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"chatgpt",
+												":city"
+											],
+											"variable": [
+												{
+													"key": "city"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<string>\",\n  \"model\": \"<string>\",\n  \"answer\": \"<string>\",\n  \"question\": \"<string>\"\n}"
+								},
+								{
+									"id": "899e6c8f-7457-479a-b0fe-f3bbdbb5e205",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/chatgpt/:city",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"chatgpt",
+												":city"
+											],
+											"variable": [
+												{
+													"key": "city"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "38cd39c5-aeab-4841-855d-1a5ba47353bd"
+				}
+			],
+			"id": "0ea88b1a-99b2-4d09-b55d-2dfdbb92932e"
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{basicAuthUsername}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{basicAuthPassword}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "27f91647-bea2-4e97-be8a-22e40bb85ce5",
+			"key": "baseUrl",
+			"value": "https://api.gcp.cointet.com"
+		}
+	]
+}

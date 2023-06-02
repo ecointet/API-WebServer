@@ -10,18 +10,19 @@ servers:
   - url: https://api.gcp.cointet.com
     description: Production server (uses live data)
 paths:
-  /locate:
+  /locate/{ip}:
     get:
       summary: Locate an IP
       description: |
         Upon successful execution, returns a all known information about a public IP. 
         The API will also give a photo to illustrate the nearest city found.
       parameters:
-        - in: query
+        - in: path
           name: ip
           description: Public IP to locate
+          required: true
           schema:
-            $ref: '#/components/schemas/ip'
+            $ref: '#/components/schemas/ip_param'
       responses:
         "200":
           description: Success
@@ -30,17 +31,73 @@ paths:
               schema:
                 $ref: '#/components/schemas/locate'
         "500":
-          description: ERROR
+          description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/locate'
+  /details/{country}:
+    get:
+      summary: Get Country Details
+      description: |
+        Useful to check if a country exists, and get some details about it
+      parameters:
+        - in: path
+          name: country
+          description: The Full Country Name
+          required: true
+          schema:
+            $ref: '#/components/schemas/country_param'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/details'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /chatgpt/{city}:
+    get:
+      summary: Get an AI generated sentence about the city
+      description: |
+        One short sentence to describe the city requested
+      parameters:
+        - in: path
+          name: city
+          description: The City Name
+          required: true
+          schema:
+            $ref: '#/components/schemas/city_param'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chatgpt'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
   securitySchemes:
     BasicAuth:
       type: http
       scheme: basic
   schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Error with your parameters"
     locate:
       type: object
       properties:
@@ -59,5 +116,36 @@ components:
         photo:
           type: string
           example: "https://google.com/image"
-    ip:
+    details:
+      type: object
+      properties:
+        country:
+          type: string
+          example: "Spain"
+        details:
+          type: string
+          example: "A great country in europe"
+    chatgpt:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT"
+        model:
+          type: string
+          example: "gpt-3.5-turbo-0301"
+        answer:
+            type: string
+            example: "Versailles is a city located in the Île-de-France region of France, known for its magnificent Palace of Versailles."
+        question:
+            type: string
+            example: "In one sentence, give me some information about the city: Versailles"
+    city_param:
       type: string
+      example: "Versailles"
+    country_param:
+      type: string
+      example: "France"
+    ip_param:
+      type: string
+      example: "46.8.173.77"
