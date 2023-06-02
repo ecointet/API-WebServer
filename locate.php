@@ -1,6 +1,7 @@
 <?php
 //A Fun API WebServer
 //by @ecointet (twitter)
+
 require "src/tools.php";
 require "src/functions.php";
 ?>
@@ -11,8 +12,8 @@ header("Access-Control-Allow-Origin: *");
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method == 'GET') {
-	if (isset($_GET['ip']))
-        $retour = cityFromIP($_GET['ip']);
+	if (isset($_GET['param']))
+        $retour = cityFromIP($_GET['param']);
 }
 if ($method == 'POST') {
 	echo "THIS IS A POST REQUEST";
@@ -27,7 +28,9 @@ if ($method == 'DELETE') {
 if (isset($retour))
     die($retour);
 
-$n_json['error'] = "Missing an arg (?ip=)";
+if (isset($_GET))
+$n_json['params'] = implode(" ; ", $_GET);
+$n_json['error'] = "Missing an arg";
 $n_json['date'] = time();
 $n_json['usage'] = "check the doc in Postman";
 	

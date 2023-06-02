@@ -7,6 +7,7 @@ function cityFromIP($ip)
    // if ($ip == null) $ip = "127.0.0.1";
     $data = getRemoteContent("http://ip-api.com/json/".$ip); //Get City
     $json = json_decode($data);
+    if (!isset($json->country)) return error("IP details not found", $ip);
 
     $n_json['country'] = $json->country;
     $n_json['regionName'] = $json->regionName;
@@ -27,5 +28,13 @@ function cityFromIP($ip)
     $n_json['photo'] = "https://maps.googleapis.com/maps/api/place/photo?photoreference=".$photo_ref."&key=".$googleAPI."&maxwidth=2500";
 
     return(json_encode($n_json));
+}
+
+function error($data, $ip)
+{
+    $n_json['ip'] = $ip;
+    $n_json['error'] = $data;
+
+    return json_encode($n_json);
 }
 ?>
