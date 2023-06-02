@@ -27,7 +27,6 @@ jobs:
     needs: automated-api-tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Send the notification
         run:  echo "Send a notification to Confluence"
       - name: Close the message
