@@ -5,7 +5,6 @@ require "src/functions.php";
 //GET DATA
 $method = $_SERVER['REQUEST_METHOD'];
 
-//ERROR
 if (!isset($_GET['param']) || !isset($_GET['func']))
     $retour = generate_error();
 else

@@ -12,6 +12,7 @@ function cityFromIP($ip)
     if (!isset($json->country)) return error("IP details not found!", $ip);
 
     $n_json['country'] = $json->country;
+    $n_json['countryCode'] = $json->countryCode;
     $n_json['regionName'] = $json->regionName;
     $n_json['city'] = $json->city;
     $n_json['ip'] = $json->query;
@@ -34,7 +35,7 @@ function cityFromIP($ip)
 
 function DetailsFromCountry($country)
 {
-    $data = getRemoteContent("https://restcountries.com/v3.1/name/".$country); //Get Details from
+    $data = getRemoteContent("https://restcountries.com/v3.1/alpha/".$country); //Get Details from
     $json = json_decode($data);
     //print_r($json);
     if (!isset($json[0]->name->official)) return error("Country details not found", $country);
