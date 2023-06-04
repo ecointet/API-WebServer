@@ -36,18 +36,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/locate'
-  /details/{country}:
+  /details/{countryCode}:
     get:
-      summary: Get Country Details
+      summary: Get Country Details from a Country Code
       description: |
         Useful to check if a country exists, and get some details about it
       parameters:
         - in: path
-          name: country
-          description: The Full Country Name
+          name: countryCode
+          description: The Country Code
           required: true
           schema:
-            $ref: '#/components/schemas/country_param'
+            $ref: '#/components/schemas/countryCode_param'
       responses:
         "200":
           description: Success
@@ -121,7 +121,13 @@ components:
       properties:
         country:
           type: string
-          example: "Spain"
+          example: "France"
+        country_name:
+          type: string
+          example: "France"
+        code:
+          type: string
+          example: "FR"
         details:
           type: string
           example: "A great country in europe"
@@ -143,9 +149,9 @@ components:
     city_param:
       type: string
       example: "Versailles"
-    country_param:
+    countryCode_param:
       type: string
-      example: "France"
+      example: "FR"
     ip_param:
       type: string
       example: "46.8.173.77"

@@ -33,13 +33,13 @@
 										"exec": [
 											"var jsonData = pm.response.json();",
 											"",
-											"pm.test(\"Check the Country & City have been found\", function () {",
-											"    pm.expect(jsonData.country).to.be.a(\"string\");",
+											"pm.test(\"Check the CountryCode & City have been found\", function () {",
+											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
 											"    pm.expect(jsonData.city).to.be.a(\"string\");",
 											"});",
 											"",
 											"pm.test(\"Store the Country (\"+jsonData.country+\") & City (\"+jsonData.city+\") in variables\", function () {",
-											"    pm.collectionVariables.set(\"country\", jsonData.country);",
+											"    pm.collectionVariables.set(\"countryCode\", jsonData.countryCode);",
 											"    pm.collectionVariables.set(\"city\", jsonData.city);",
 											"});",
 											"",
@@ -173,12 +173,13 @@
 					"name": "{country}",
 					"item": [
 						{
-							"name": "Get Country Details",
+							"name": "Get Country Details from a Country Code",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "11d9ddad-c041-4dbf-a4f7-9d4e12268921",
+										"type": "text/javascript",
 										"exec": [
 											"var jsonData = pm.response.json();",
 											"",
@@ -189,8 +190,7 @@
 											"pm.test(\"Flag Found: \"+jsonData.flag, function () {",
 											"    pm.expect(jsonData.flag_img).to.be.a(\"string\");",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								}
 							],
@@ -218,7 +218,7 @@
 									"variable": [
 										{
 											"key": "country",
-											"value": "{{country}}"
+											"value": "{{countryCode}}"
 										}
 									]
 								},
@@ -472,21 +472,46 @@
 			}
 		]
 	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ff0ee4e5-e72a-450f-a104-a5e4f49c0b2e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "414143ad-84f3-4853-8ee2-737473900799",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "02b7b437-7dbc-468d-9d1a-db797fb62209",
+			"id": "d4f10637-0c8b-43ea-a443-7ef1c532da89",
 			"key": "baseUrl",
-			"value": "https://api.gcp.cointet.com"
+			"value": "https://api.gcp.cointet.com",
+			"type": "any"
 		},
 		{
-			"id": "784845be-ee38-4262-bd91-1071c2892c56",
-			"key": "country",
-			"value": ""
+			"id": "e1c74d46-3df3-4648-ab4f-53759a806f6e",
+			"key": "countryCode",
+			"value": "",
+			"type": "any"
 		},
 		{
-			"id": "fa180e3f-4de8-4c6e-8738-352b179dc036",
+			"id": "d262509e-5ff8-419d-b95e-a0c8843f6588",
 			"key": "city",
-			"value": ""
+			"value": "",
+			"type": "any"
 		}
 	]
 }
