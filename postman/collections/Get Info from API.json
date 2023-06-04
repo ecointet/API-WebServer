@@ -40,7 +40,7 @@
 											"",
 											"pm.test(\"Store the Country (\"+jsonData.country+\") & City (\"+jsonData.city+\") in variables\", function () {",
 											"    pm.collectionVariables.set(\"countryCode\", jsonData.countryCode);",
-											"    pm.collectionVariables.set(\"city\", jsonData.city);",
+											"    pm.collectionVariables.set(\"city\", jsonData.city.replace(/\\s/g, '-'));",
 											"});",
 											"",
 											""
@@ -496,19 +496,19 @@
 	],
 	"variable": [
 		{
-			"id": "d4f10637-0c8b-43ea-a443-7ef1c532da89",
+			"id": "5f67f30b-c0c9-4868-9950-3926a25f0b65",
 			"key": "baseUrl",
 			"value": "https://api.gcp.cointet.com",
 			"type": "any"
 		},
 		{
-			"id": "e1c74d46-3df3-4648-ab4f-53759a806f6e",
+			"id": "20c8a857-645c-479a-99ae-5d4f1382d0d5",
 			"key": "countryCode",
 			"value": "",
 			"type": "any"
 		},
 		{
-			"id": "d262509e-5ff8-419d-b95e-a0c8843f6588",
+			"id": "f855aa09-4fda-4729-85d2-fde52a77675d",
 			"key": "city",
 			"value": "",
 			"type": "any"
