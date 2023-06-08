@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "65836149-868e-4bac-9209-fb488fd2b409",
-		"name": "Get Info from API",
+		"_postman_id": "71b906ce-fd6d-4057-acf7-bc58d8a98d34",
+		"name": "GeoInfo",
 		"description": "From a simple public IP you can get geographical information such as the City and Country",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "27516587-65836149-868e-4bac-9209-fb488fd2b409"
+		"_uid": "27516587-71b906ce-fd6d-4057-acf7-bc58d8a98d34"
 	},
 	"item": [
 		{
@@ -17,39 +17,27 @@
 							"name": "Locate an IP",
 							"event": [
 								{
-									"listen": "prerequest",
-									"script": {
-										"id": "9b33ae44-ba42-422e-8130-0f14d49f1386",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
 									"listen": "test",
 									"script": {
-										"id": "cccf4cb8-79f2-4560-84f9-4884c42a0729",
+										"id": "1d935322-9716-447a-974a-568d011a98aa",
 										"exec": [
 											"var jsonData = pm.response.json();",
 											"",
-											"pm.test(\"Check the CountryCode & City have been found\", function () {",
+											"pm.test(\"Get Country Code: \" + jsonData.countryCode, function () {",
 											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
-											"    pm.expect(jsonData.city).to.be.a(\"string\");",
+											"    pm.collectionVariables.set(\"countryCode\", jsonData.countryCode); ",
 											"});",
 											"",
-											"pm.test(\"Store the Country (\"+jsonData.country+\") & City (\"+jsonData.city+\") in variables\", function () {",
-											"    pm.collectionVariables.set(\"countryCode\", jsonData.countryCode);",
-											"    pm.collectionVariables.set(\"city\", jsonData.city.replace(/\\s/g, '-'));",
-											"});",
-											"",
-											""
+											"pm.test(\"Get City: \" + jsonData.city, function () {",
+											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
+											"    pm.collectionVariables.set(\"city\", jsonData.city.replace(/\\s/g, '') ); ",
+											"});"
 										],
 										"type": "text/javascript"
 									}
 								}
 							],
-							"id": "b9970553-c6e7-4059-aa61-1be859f3067d",
+							"id": "cdb00294-3f7b-44ed-96dc-a8371cd50490",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -73,7 +61,7 @@
 									"variable": [
 										{
 											"key": "ip",
-											"value": ""
+											"value": "46.8.173.77"
 										}
 									]
 								},
@@ -81,7 +69,7 @@
 							},
 							"response": [
 								{
-									"id": "a404ce9a-43e5-4813-8a37-a4eb8cd10627",
+									"id": "94764cc1-5842-41d2-a414-ce6023d9835e",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -117,10 +105,10 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"country\": \"<string>\",\n  \"regionName\": \"<string>\",\n  \"city\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"photo\": \"<string>\"\n}"
+									"body": "{\n  \"country\": \"United States\",\n  \"countryCode\": \"US\",\n  \"regionName\": \"Florida\",\n  \"city\": \"Miami\",\n  \"ip\": \"173.255.189.42\",\n  \"photo\": \"https://shorturl.at/eyMV7\"\n}"
 								},
 								{
-									"id": "ad3e5b65-a419-4ca8-b6bd-1ccd0d7782be",
+									"id": "bb0fc68c-4342-4008-9f38-79d554534cd0",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -156,21 +144,21 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"country\": \"<string>\",\n  \"regionName\": \"<string>\",\n  \"city\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"photo\": \"<string>\"\n}"
+									"body": "{\n  \"country\": \"United States\",\n  \"countryCode\": \"US\",\n  \"regionName\": \"Florida\",\n  \"city\": \"Miami\",\n  \"ip\": \"173.255.189.42\",\n  \"photo\": \"https://shorturl.at/eyMV7\"\n}"
 								}
 							]
 						}
 					],
-					"id": "c459ae36-0edf-4402-b9bf-0cd482060db0"
+					"id": "4cba865a-d1c0-4da6-bde1-fe4c2b7edeaf"
 				}
 			],
-			"id": "c68ddf00-9d60-41fd-97a6-91dddeee4a7a"
+			"id": "df0992bf-b147-46ac-a910-0256d25960b8"
 		},
 		{
 			"name": "details",
 			"item": [
 				{
-					"name": "{country}",
+					"name": "{countryCode}",
 					"item": [
 						{
 							"name": "Get Country Details from a Country Code",
@@ -178,23 +166,19 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "11d9ddad-c041-4dbf-a4f7-9d4e12268921",
-										"type": "text/javascript",
+										"id": "e36752e7-3f3a-4d9a-aa8f-42050f23ad7e",
 										"exec": [
 											"var jsonData = pm.response.json();",
 											"",
-											"pm.test(\"Country Found: \"+jsonData.country, function () {",
-											"    pm.expect(jsonData.country).to.be.a(\"string\");",
-											"});",
-											"",
-											"pm.test(\"Flag Found: \"+jsonData.flag, function () {",
-											"    pm.expect(jsonData.flag_img).to.be.a(\"string\");",
+											"pm.test(\"Country Flag: \" + jsonData.flag, function () {",
+											"    pm.expect(jsonData.flag).to.be.a(\"string\");",
 											"});"
-										]
+										],
+										"type": "text/javascript"
 									}
 								}
 							],
-							"id": "d8e35b13-9364-48ca-a986-9f492e3ac257",
+							"id": "164bf9f3-81df-41a0-8044-bbccbf92b523",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -207,18 +191,18 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/details/:country",
+									"raw": "{{baseUrl}}/details/:countryCode",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"details",
-										":country"
+										":countryCode"
 									],
 									"variable": [
 										{
-											"key": "country",
-											"value": "{{countryCode}}"
+											"key": "countryCode",
+											"value": "FR"
 										}
 									]
 								},
@@ -226,7 +210,7 @@
 							},
 							"response": [
 								{
-									"id": "6b0e8bd2-f298-4507-a33f-9268edab5ab9",
+									"id": "a014c87a-3b4c-400e-9109-116503d5fefa",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -237,17 +221,17 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/details/:country",
+											"raw": "{{baseUrl}}/details/:countryCode",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"details",
-												":country"
+												":countryCode"
 											],
 											"variable": [
 												{
-													"key": "country"
+													"key": "countryCode"
 												}
 											]
 										}
@@ -262,10 +246,10 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"country\": \"<string>\",\n  \"details\": \"<string>\"\n}"
+									"body": "{\n  \"country\": \"France\",\n  \"country_name\": \"France\",\n  \"code\": \"FR\",\n  \"details\": \"A great country in europe\"\n}"
 								},
 								{
-									"id": "4dc242d6-7e72-4d8f-82dc-ceb373dac48b",
+									"id": "78c717a2-b596-4426-9633-8590588de9a2",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -276,17 +260,17 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/details/:country",
+											"raw": "{{baseUrl}}/details/:countryCode",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"details",
-												":country"
+												":countryCode"
 											],
 											"variable": [
 												{
-													"key": "country"
+													"key": "countryCode"
 												}
 											]
 										}
@@ -301,15 +285,15 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"message\": \"<string>\"\n}"
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
 								}
 							]
 						}
 					],
-					"id": "3dc686e5-9cec-4dec-9196-361dbe98a36f"
+					"id": "d6d04463-b21e-4e19-b825-caa9a376fb47"
 				}
 			],
-			"id": "1682dc3c-8383-41a9-b9b8-80cbac626ee9"
+			"id": "6c714422-99ae-4fa1-a807-190333c6abe8"
 		},
 		{
 			"name": "chatgpt",
@@ -323,15 +307,11 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "dfc10368-3e45-466d-a778-cf4e3b20f6e7",
+										"id": "03328b7a-715b-424d-9a0d-5114a6c92534",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"",
 											"var jsonData = pm.response.json();",
 											"",
-											"pm.test(\"Check the chatGPT sentence has been found: \"+jsonData.answer, function () {",
+											"pm.test(\"chatGPT: \" + jsonData.answer, function () {",
 											"    pm.expect(jsonData.answer).to.be.a(\"string\");",
 											"});"
 										],
@@ -339,7 +319,7 @@
 									}
 								}
 							],
-							"id": "306f819a-a2b7-4949-a6ab-11e300ac2458",
+							"id": "8c336784-fc99-46b7-9602-cd4a68a6b2da",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -363,7 +343,7 @@
 									"variable": [
 										{
 											"key": "city",
-											"value": "{{city}}"
+											"value": "Versailles"
 										}
 									]
 								},
@@ -371,7 +351,7 @@
 							},
 							"response": [
 								{
-									"id": "f2d71de4-2baf-4bf8-9bb4-ec7700bf6a69",
+									"id": "5ff48c15-169b-416b-bd93-e2212ce3f5fa",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -407,10 +387,10 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"id\": \"<string>\",\n  \"model\": \"<string>\",\n  \"answer\": \"<string>\",\n  \"question\": \"<string>\"\n}"
+									"body": "{\n  \"id\": \"chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT\",\n  \"model\": \"gpt-3.5-turbo-0301\",\n  \"answer\": \"Versailles is a city located in the Île-de-France region of France, known for its magnificent Palace of Versailles.\",\n  \"question\": \"In one sentence, give me some information about the city: Versailles\"\n}"
 								},
 								{
-									"id": "899e6c8f-7457-479a-b0fe-f3bbdbb5e205",
+									"id": "b3e4b1d0-a4dc-4954-b7d4-6f25adea69b5",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -446,15 +426,15 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"message\": \"<string>\"\n}"
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
 								}
 							]
 						}
 					],
-					"id": "38cd39c5-aeab-4841-855d-1a5ba47353bd"
+					"id": "0c793939-1104-4f50-b021-71cd94e9d342"
 				}
 			],
-			"id": "0ea88b1a-99b2-4d09-b55d-2dfdbb92932e"
+			"id": "dba88e5e-75a3-4b02-b816-0f6c8d65953e"
 		}
 	],
 	"auth": {
@@ -472,46 +452,21 @@
 			}
 		]
 	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "ff0ee4e5-e72a-450f-a104-a5e4f49c0b2e",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "414143ad-84f3-4853-8ee2-737473900799",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
 	"variable": [
 		{
-			"id": "5f67f30b-c0c9-4868-9950-3926a25f0b65",
+			"id": "ca6a9051-beef-4335-99fc-4023d4c6f737",
 			"key": "baseUrl",
-			"value": "https://api.gcp.cointet.com",
-			"type": "any"
+			"value": "https://api.gcp.cointet.com"
 		},
 		{
-			"id": "20c8a857-645c-479a-99ae-5d4f1382d0d5",
+			"id": "0bea381d-4f7e-4996-a8b1-f1d527a1b788",
 			"key": "countryCode",
-			"value": "",
-			"type": "any"
+			"value": ""
 		},
 		{
-			"id": "f855aa09-4fda-4729-85d2-fde52a77675d",
+			"id": "e71a2e7e-333a-4dcc-bffe-b02c3ae4d654",
 			"key": "city",
-			"value": "",
-			"type": "any"
+			"value": ""
 		}
 	]
 }
