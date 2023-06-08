@@ -16,6 +16,8 @@ else
             $retour = DetailsFromCountry($_GET['param']);
         if (strtolower($_GET['func']) == "chatgpt")
             $retour = ChatGPT($_GET['param']);
+        if (strtolower($_GET['func']) == "smarthome")
+            $retour = SmartHome();
     }
     if ($method == 'POST') {
         echo "THIS IS A POST REQUEST";

@@ -5,8 +5,7 @@
 function cityFromIP($ip)
 {
    // if ($ip == null) $ip = "127.0.0.1";
-   //REMOVE IP IF NOT GOOD
-   if (strlen($ip) <= 6) $ip = "";
+    if (!filter_var($ip, FILTER_VALIDATE_IP)) $ip = ""; //REMOVE IP IF NOT VALID
     $data = getRemoteContent("http://ip-api.com/json/".$ip); //Get City
     $json = json_decode($data);
     if (!isset($json->country)) return error("IP details not found!", $ip);
@@ -80,6 +79,23 @@ function ChatGPT($city)
    $n_json['question'] = $question;
     
    return(json_encode($n_json));
+}
+
+//BONUS (SMARTHOME)
+function SmartHome()
+{
+    $data = getRemoteContent("https://webhook.homey.app/62cbc64f9685c30bd64964fa/light"); //Get Details from
+    $json = json_decode($data);
+    //print_r($json);
+
+    $n_json['country'] = "n/a";
+    $n_json['countryCode'] = "n/a";
+    $n_json['regionName'] = "n/a";
+    $n_json['city'] = "Light turned n/off 💡";
+    $n_json['ip'] = "n/a";
+    $n_json['photo'] = "https://static.vecteezy.com/system/resources/previews/008/774/343/non_2x/illustration-wood-table-floor-and-blurred-background-atmosphere-front-room-light-shining-through-the-curtain-in-home-vector.jpg";
+    
+    return(json_encode($n_json));
 }
 
 function error($data, $ip)
