@@ -18,7 +18,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/Locate my public IP.json" -e "27516587-42c5553e-8506-453e-a0c5-ede19baf26a5"
+          postman collection run "${{ github.workspace }}/postman/collections/GeoInfo.json"
           # Lint your API using Postman CLI
           postman api lint 845d2462-6ab4-441e-a5c6-977dda179458
   
