@@ -18,9 +18,9 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/GeoInfo.json"
+          postman collection run "${{ github.workspace }}/postman/collections/MyLocateAPI.json" -e "27516587-558c02a4-4f1c-4e66-82d1-44efd9dbd40d" --integration-id "142213-${{ github.run_id }}"
           # Lint your API using Postman CLI
-          postman api lint 845d2462-6ab4-441e-a5c6-977dda179458
+          postman api lint bcc59492-f0bc-40de-baee-e44e652da728 --integration-id 142213
   
   
   notify-confluence:
@@ -79,7 +79,7 @@ jobs:
 #   Principle of least privilege        - https://cloud.google.com/blog/products/identity-security/dont-get-pwned-practicing-the-principle-of-least-privilege
 
   deploy:
-    if: true
+    if: false
     needs: [automated-api-tests, notify-confluence]
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
