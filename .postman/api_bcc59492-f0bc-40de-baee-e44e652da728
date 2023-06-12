@@ -9,6 +9,7 @@ id = bcc59492-f0bc-40de-baee-e44e652da728
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"27516587-d0363f1d-6f86-4441-937f-f1423d5ffbf5","path":"MyLocateAPI.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Paths\",\"includeAuthInfoInExample\":false,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
