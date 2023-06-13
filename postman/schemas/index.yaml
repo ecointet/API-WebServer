@@ -55,13 +55,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/details'
-        "500":
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /chatgpt/{city}:
+  /chatgpt/{city}/:
     get:
       summary: Get an AI generated sentence about the city
       description: |
