@@ -35,7 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/locate'
+                $ref: '#/components/schemas/error'
   /details/{countryCode}:
     get:
       summary: Get Country Details from a Country Code
@@ -159,10 +159,10 @@ components:
             example: "In one sentence, give me some information about the city: Miami"
     city_param:
       type: string
-      example: "Marbella"
+      example: "Miami"
     countryCode_param:
       type: string
-      example: "ES"
+      example: "US"
     ip_param:
       type: string
       example: "46.8.173.77"
