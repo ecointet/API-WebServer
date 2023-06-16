@@ -15,6 +15,7 @@ function cityFromIP($ip)
     $n_json['regionName'] = $json->regionName;
     $n_json['city'] = $json->city;
     $n_json['ip'] = $json->query;
+    $n_json['description'] = "This city is probably not too far away from you!";
 
     if (!getenv("GKEY")) die("Incorrect Google API KEY");
     $googleAPI = getenv("GKEY");
@@ -91,10 +92,11 @@ function SmartHome()
     $n_json['country'] = "n/a";
     $n_json['countryCode'] = "n/a";
     $n_json['regionName'] = "n/a";
-    $n_json['city'] = "Light turned n/off 💡";
+    $n_json['city'] = "Light turned On/off 💡";
     $n_json['ip'] = "n/a";
     $n_json['photo'] = "https://static.vecteezy.com/system/resources/previews/008/774/343/non_2x/illustration-wood-table-floor-and-blurred-background-atmosphere-front-room-light-shining-through-the-curtain-in-home-vector.jpg";
-    
+    $n_json['description'] = "The Home API returned ".$data;
+
     return(json_encode($n_json));
 }
 
