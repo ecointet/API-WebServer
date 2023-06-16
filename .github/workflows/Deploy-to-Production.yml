@@ -79,7 +79,7 @@ jobs:
 #   Principle of least privilege        - https://cloud.google.com/blog/products/identity-security/dont-get-pwned-practicing-the-principle-of-least-privilege
 
   deploy:
-    if: true
+    if: false
     needs: [automated-api-tests, notify-confluence]
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
