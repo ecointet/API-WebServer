@@ -479,17 +479,17 @@
 	},
 	"variable": [
 		{
-			"id": "d3e08ea4-bdd3-4f0a-b0a7-3f2031535566",
+			"id": "d51416b8-c455-48bb-998f-09c457ae4f84",
 			"key": "baseUrl",
 			"value": "https://api.gcp.cointet.com"
 		},
 		{
-			"id": "b9715bcc-09d0-4224-8ae8-da2600fe3369",
+			"id": "4f18db5d-14d2-4fbe-9449-f0f1772340fb",
 			"key": "countryCode",
 			"value": ""
 		},
 		{
-			"id": "c2e7c961-935f-4f2e-ab1c-f9df59abf600",
+			"id": "8ecd3995-94fa-4b4c-b5eb-740c468a9b8e",
 			"key": "city",
 			"value": ""
 		}

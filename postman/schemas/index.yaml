@@ -55,7 +55,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/details'
-  /chatgpt/{city}/:
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /chatgpt/{city}:
     get:
       summary: Get an AI generated sentence about the city
       description: |
@@ -113,6 +119,9 @@ components:
         photo:
           type: string
           example: "https://shorturl.at/eyMV7"
+        description:
+          type: string
+          example: "This city is a fake (Mock Server)"
     details:
       type: object
       properties:
