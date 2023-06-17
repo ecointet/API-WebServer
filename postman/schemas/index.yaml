@@ -121,7 +121,7 @@ components:
           example: "https://shorturl.at/eyMV7"
         description:
           type: string
-          example: "This city is a fake (Mock Server)"
+          example: "This is the nearest city found"
     details:
       type: object
       properties:

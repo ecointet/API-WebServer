@@ -15,6 +15,55 @@
 					"item": [
 						{
 							"name": "Locate an IP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a9ef55c9-021a-4d6c-8ff7-d0d1221f68db",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Get Country Code: \" + jsonData.countryCode, function () {",
+											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
+											"    pm.collectionVariables.set(\"countryCode\", jsonData.countryCode); ",
+											"});",
+											"",
+											"pm.test(\"Get City: \" + jsonData.city, function () {",
+											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
+											"    pm.collectionVariables.set(\"city\", jsonData.city.replace(/\\s/g, '') ); ",
+											"});",
+											"",
+											"",
+											"//Better way to visualize",
+											"var template = `",
+											"    <table bgcolor=\"#FFFFFF\">",
+											"        <tr>",
+											"            <th>Country</th>",
+											"            <th>Region</th>",
+											"            <th>City</th>",
+											"            <th>Desccription</th>",
+											"            <th>Photo</th>",
+											"        </tr>",
+											"",
+											"            <tr>",
+											"                <td>{{response.country}} ({{response.countryCode}})</td>",
+											"                <td>{{response.regionName}}</td>",
+											"                <td>{{response.city}}</td>",
+											"                <td>{{response.description}}</td>",
+											"                <td><img src='{{response.photo}}' width=\"100px\"/></td>",
+											"            </tr>",
+											"",
+											"    </table>",
+											"`;",
+											"",
+											"pm.visualizer.set(template, {",
+											"    response: jsonData",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "ac1536a8-2879-4e1d-a3b7-fd795e39161e",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -140,6 +189,22 @@
 					"item": [
 						{
 							"name": "Get Country Details from a Country Code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "15b148d5-c818-4d1d-8c25-24c59ed84e16",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Country Flag: \" + jsonData.flag, function () {",
+											"    pm.expect(jsonData.flag).to.be.a(\"string\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "7866313d-5e66-4b8e-be61-f6f82c34553b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -265,6 +330,22 @@
 					"item": [
 						{
 							"name": "Get an AI generated sentence about the city",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1d357ab9-520c-4cc0-beb8-8e3949fd3380",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"chatGPT: \" + jsonData.answer, function () {",
+											"    pm.expect(jsonData.answer).to.be.a(\"string\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "fa89eb8b-0414-43a7-8486-d9bb991b338f",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -400,9 +481,19 @@
 	},
 	"variable": [
 		{
-			"id": "ee7e7753-73da-4fce-b220-9eb4a823cb68",
+			"id": "dd8e32fc-fda3-44af-9b3c-214f946602df",
 			"key": "baseUrl",
 			"value": "https://api.gcp.cointet.com"
+		},
+		{
+			"id": "ca15c8b3-4a80-467c-80a9-fafdfdd3e6c5",
+			"key": "countryCode",
+			"value": ""
+		},
+		{
+			"id": "0f620635-bb06-4633-b766-40854ae2aca4",
+			"key": "city",
+			"value": ""
 		}
 	]
 }
