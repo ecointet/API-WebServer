@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.3
 info:
-  title: Get information about a Public IP API
+  title: Get information about a Public IP
   version: 1.0.0
   description: From a simple public IP you can get geographical information such as the City and Country
 security:
@@ -61,7 +61,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /chatgpt/{city}/:
+  /chatgpt/{city}:
     get:
       summary: Get an AI generated sentence about the city
       description: |
@@ -80,7 +80,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chatgpt'
-        "400":
+        "500":
           description: Error
           content:
             application/json:
