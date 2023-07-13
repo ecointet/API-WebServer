@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GetWifProvider
-        run:  echo ${{ secrets.WIF_PROVIDER }} | sed 's/./& /g'
+        run:  echo ${{ secrets.WIF_PROVIDER }}
       - name: GetWifServiceAccount
-        run:  echo ${{ secrets.WIF_SERVICE_ACCOUNT }} | sed 's/./& /g'
+        run:  echo ${{ secrets.WIF_SERVICE_ACCOUNT }}
         
   automated-api-tests:
     runs-on: ubuntu-latest
