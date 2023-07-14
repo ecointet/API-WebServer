@@ -4,6 +4,7 @@
 
 function cityFromIP($ip)
 {
+    MirrorApiPython("locate/".$ip);
    // if ($ip == null) $ip = "127.0.0.1";
     if (!filter_var($ip, FILTER_VALIDATE_IP)) $ip = ""; //REMOVE IP IF NOT VALID
     $data = getRemoteContent("http://ip-api.com/json/".$ip); //Get City
@@ -33,8 +34,35 @@ function cityFromIP($ip)
     return(json_encode($n_json));
 }
 
+function Explore($city)
+{
+    MirrorApiPython("explore/".$city);
+    //$n_json['country'] = $json->country;
+    //$n_json['countryCode'] = $json->countryCode;
+    //$n_json['regionName'] = $json->regionName;
+    $n_json['city'] = $city;
+    //$n_json['ip'] = $json->query;
+    $n_json['description'] = "You are exploring this city.";
+
+    if (!getenv("GKEY")) die("Incorrect Google API KEY");
+    $googleAPI = getenv("GKEY");
+    
+
+    if ($city) // Get Photo Ref
+    {
+        $data = getRemoteContent("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=".urlencode($city)."&key=".$googleAPI."&inputtype=textquery&fields=name,photos"); 
+        $json = json_decode($data);
+    }
+    $photo_ref = $json->candidates[0]->photos[0]->photo_reference;
+    
+    $n_json['photo'] = "https://maps.googleapis.com/maps/api/place/photo?photoreference=".$photo_ref."&key=".$googleAPI."&maxwidth=2500";
+
+    return(json_encode($n_json));
+}
+
 function DetailsFromCountry($country)
 {
+    MirrorApiPython("details/".$country);
     $data = getRemoteContent("https://restcountries.com/v3.1/alpha/".$country); //Get Details from
     $json = json_decode($data);
     //print_r($json);
@@ -52,6 +80,7 @@ function DetailsFromCountry($country)
 
 function ChatGPT($city)
 {
+    MirrorApiPython("chatgpt/".$city);
     if (!getenv("OPENAI")) die("Incorrect OPEN API KEY");
     $openaiAPI = getenv("OPENAI");
 

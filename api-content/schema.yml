@@ -1,16 +1,16 @@
 ---
 openapi: 3.0.3
 info:
-  title: Get information about a Public IP
+  title: GeoInfo
   version: 1.0.0
   description: From a simple public IP you can get geographical information such as the City and Country
 security:
-  - BasicAuth: []
+  - bearerAuth: []
 servers:
-  - url: https://api.gcp.cointet.com
-    description: Production server (uses live data)
+  - url: https://api.cointet.com
+    description: Production server (live data)
 paths:
-  /locate/{ip}:
+  /locate/{ip}/:
     get:
       summary: Locate an IP
       description: |
@@ -30,7 +30,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/locate'
-        "500":
+        "400":
           description: Error
           content:
             application/json:
@@ -88,9 +88,9 @@ paths:
                 $ref: '#/components/schemas/error'
 components:
   securitySchemes:
-    BasicAuth:
+    bearerAuth:
       type: http
-      scheme: basic
+      scheme: bearer
   schemas:
     error:
       type: object

@@ -39,4 +39,13 @@ function getRemoteContent($url, $headers = null, $data = null)
 
     return $response;
 }
+
+function MirrorApiPython($func)
+{
+    $mirrorApi = getenv("MIRROR_API");
+    if ($mirrorApi && strlen($mirrorApi) > 5)
+    {
+        return getRemoteContent($mirrorApi."/".$func, $headers = null, $data = null);
+    }
+}
 ?>

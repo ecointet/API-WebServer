@@ -3,6 +3,9 @@
 # https://hub.docker.com/_/php
 FROM php:8.0-apache
 
+## PYTHON INSTALL
+RUN apt-get update
+
 # Configure PHP for Cloud Run.
 # Precompile PHP code with opcache.
 RUN docker-php-ext-install -j "$(nproc)" opcache

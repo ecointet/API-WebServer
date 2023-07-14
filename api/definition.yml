@@ -7,7 +7,7 @@ info:
 security:
   - BasicAuth: []
 servers:
-  - url: https://api.gcp.cointet.com
+  - url: https://api.cointet.com
     description: Production server (uses live data)
 paths:
   /locate/{ip}:
@@ -35,7 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/locate'
+                $ref: '#/components/schemas/error'
   /details/{countryCode}:
     get:
       summary: Get Country Details from a Country Code
@@ -61,7 +61,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /chatgpt/{city}:
+  /chatgpt/{city}/:
     get:
       summary: Get an AI generated sentence about the city
       description: |
@@ -80,7 +80,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chatgpt'
-        "500":
+        "400":
           description: Error
           content:
             application/json:
@@ -119,21 +119,32 @@ components:
         photo:
           type: string
           example: "https://shorturl.at/eyMV7"
+        description:
+          type: string
+          example: "This is the nearest city found"
     details:
       type: object
       properties:
         country:
           type: string
-          example: "France"
+          example: "United States"
         country_name:
           type: string
-          example: "France"
+          example: "USA"
         code:
           type: string
-          example: "FR"
-        details:
+          example: "US"
+        flag:
           type: string
-          example: "A great country in europe"
+          example: "🇺🇸"
+        flag_img: 
+          type: string
+          example: "https://flagcdn.com/w320/us.png"
+        flag_alt: 
+          type: string
+          example: "The flag of the United States of America is composed of thirteen equal horizontal bands of \
+          red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged in\
+          nine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton."
     chatgpt:
       type: object
       properties:
@@ -145,16 +156,16 @@ components:
           example: "gpt-3.5-turbo-0301"
         answer:
             type: string
-            example: "Versailles is a city located in the Île-de-France region of France, known for its magnificent Palace of Versailles."
+            example: "Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population."
         question:
             type: string
-            example: "In one sentence, give me some information about the city: Versailles"
+            example: "In one sentence, give me some information about the city: Miami"
     city_param:
       type: string
-      example: "Versailles"
+      example: "Miami"
     countryCode_param:
       type: string
-      example: "FR"
+      example: "US"
     ip_param:
       type: string
       example: "46.8.173.77"

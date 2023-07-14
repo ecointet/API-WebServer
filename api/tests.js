@@ -12,6 +12,33 @@ pm.test("Get City: " + jsonData.city, function () {
     pm.collectionVariables.set("city", jsonData.city.replace(/\s/g, '') ); 
 });
 
+
+//Better way to visualize
+var template = `
+    <table bgcolor="#FFFFFF">
+        <tr>
+            <th>Country</th>
+            <th>Region</th>
+            <th>City</th>
+            <th>Desccription</th>
+            <th>Photo</th>
+        </tr>
+
+            <tr>
+                <td>{{response.country}} ({{response.countryCode}})</td>
+                <td>{{response.regionName}}</td>
+                <td>{{response.city}}</td>
+                <td>{{response.description}}</td>
+                <td><img src='{{response.photo}}' width="100px"/></td>
+            </tr>
+
+    </table>
+`;
+
+pm.visualizer.set(template, {
+    response: jsonData
+});
+
 //API: /DETAILS
 
 var jsonData = pm.response.json();
