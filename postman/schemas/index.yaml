@@ -10,7 +10,7 @@ servers:
   - url: https://api.cointet.com
     description: Production server (live data)
 paths:
-  /locate/{ip}:
+  /locate/{ip}/:
     get:
       summary: Locate an IP
       description: |
