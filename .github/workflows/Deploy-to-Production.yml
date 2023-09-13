@@ -18,9 +18,9 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/GeoInfo.json" --integration-id "142567-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/Geoinfo.json" --integration-id "148163-${{ github.run_id }}"
           # Lint your API using Postman CLI
-          postman api lint ee7b3c8c-c407-42b1-b8fb-affe10e1c0c2 --integration-id 142567
+          postman api lint ed902b87-8d65-4a4d-8102-2fcdf2eec5b4 --integration-id 148163
   
   
   notify-confluence:
