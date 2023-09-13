@@ -16,7 +16,6 @@ jobs:
         run:  echo ${{ secrets.WIF_SERVICE_ACCOUNT }}
         
   automated-api-tests:
-    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,9 +26,9 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "${{ github.workspace }}/postman/collections/MyLocateAPI.json" -e "27516587-558c02a4-4f1c-4e66-82d1-44efd9dbd40d" --integration-id "142213-${{ github.run_id }}"
+          postman collection run "${{ github.workspace }}/postman/collections/Geoinfo.json" --integration-id "148163-${{ github.run_id }}"
           # Lint your API using Postman CLI
-          postman api lint bcc59492-f0bc-40de-baee-e44e652da728 --integration-id 142213
+          postman api lint ed902b87-8d65-4a4d-8102-2fcdf2eec5b4 --integration-id 148163
   
   
   notify-confluence:
