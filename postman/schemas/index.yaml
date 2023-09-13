@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.3
 info:
-  title: API GeoInfo
+  title:  GeoInfo
   version: 1.0.0
   description: From a simple public IP you can get geographical information such as the City and Country
 security:
