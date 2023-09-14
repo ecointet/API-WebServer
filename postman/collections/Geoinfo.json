@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "19808be0-7e6e-467c-9009-8f03f5730c73",
+		"_postman_id": "035734b3-c630-4dc4-91d0-ab7f4da8d23b",
 		"name": "Geoinfo",
 		"description": "From a simple public IP you can get geographical information such as the City and Country",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "27516587-19808be0-7e6e-467c-9009-8f03f5730c73"
+		"_uid": "27516587-035734b3-c630-4dc4-91d0-ab7f4da8d23b"
 	},
 	"item": [
 		{
@@ -15,56 +15,7 @@
 					"item": [
 						{
 							"name": "Locate an IP",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "2aaaba3e-7ca1-44c0-baa5-0e461cbc5b0f",
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"pm.test(\"Get Country Code: \" + jsonData.countryCode, function () {",
-											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
-											"    pm.collectionVariables.set(\"countryCode\", jsonData.countryCode); ",
-											"});",
-											"",
-											"pm.test(\"Get City: \" + jsonData.city, function () {",
-											"    pm.expect(jsonData.countryCode).to.be.a(\"string\");",
-											"    pm.collectionVariables.set(\"city\", jsonData.city.replace(/\\s/g, '') ); ",
-											"});",
-											"",
-											"",
-											"//Better way to visualize",
-											"var template = `",
-											"    <table bgcolor=\"#FFFFFF\">",
-											"        <tr>",
-											"            <th>Country</th>",
-											"            <th>Region</th>",
-											"            <th>City</th>",
-											"            <th>Desccription</th>",
-											"            <th>Photo</th>",
-											"        </tr>",
-											"",
-											"            <tr>",
-											"                <td>{{response.country}} ({{response.countryCode}})</td>",
-											"                <td>{{response.regionName}}</td>",
-											"                <td>{{response.city}}</td>",
-											"                <td>{{response.description}}</td>",
-											"                <td><img src='{{response.photo}}' width=\"100px\"/></td>",
-											"            </tr>",
-											"",
-											"    </table>",
-											"`;",
-											"",
-											"pm.visualizer.set(template, {",
-											"    response: jsonData",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"id": "37c299a1-4a57-4dbf-80ac-af9a309c8842",
+							"id": "2b88ba0d-2d72-44da-b7b3-bfb5a36707c4",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -96,7 +47,7 @@
 							},
 							"response": [
 								{
-									"id": "81580e51-7f1c-4d2d-8e2f-891e00ab5ad0",
+									"id": "4a00db46-aba2-447e-a3f0-7762a93feb67",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -140,7 +91,7 @@
 									"body": "{\n  \"country\": \"United States\",\n  \"countryCode\": \"US\",\n  \"regionName\": \"Florida\",\n  \"city\": \"Miami\",\n  \"ip\": \"173.255.189.42\",\n  \"photo\": \"https://shorturl.at/eyMV7\",\n  \"description\": \"This city is a fake (Mock Server)\"\n}"
 								},
 								{
-									"id": "63db7efb-8a5b-450b-98fe-89d5c10e495b",
+									"id": "48d7b1c4-f642-4806-8db1-e84c4da7cfa0",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -186,10 +137,10 @@
 							]
 						}
 					],
-					"id": "c521f793-c6b2-4e93-8eff-a35d2e3ad79a"
+					"id": "073c157e-e6a1-4e22-8f40-ab43b8906efc"
 				}
 			],
-			"id": "ce8495b5-4b0b-4d4e-8370-03f1060cef2c"
+			"id": "5f4def3f-cb32-4770-9e0f-00fb73483cae"
 		},
 		{
 			"name": "details",
@@ -199,23 +150,7 @@
 					"item": [
 						{
 							"name": "Get Country Details from a Country Code",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "6f5a8a2f-0599-4963-9956-9b2ddd818b41",
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"pm.test(\"Country Flag: \" + jsonData.flag, function () {",
-											"    pm.expect(jsonData.flag).to.be.a(\"string\");",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"id": "64d28a0e-f8a3-4eb1-97c1-f9bad8a28b50",
+							"id": "dd0f85c7-8811-42d0-9407-a09faab19b2e",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -247,7 +182,7 @@
 							},
 							"response": [
 								{
-									"id": "78b8e11e-9ca1-4d03-8712-06a00ee001d6",
+									"id": "35fe6fa6-b1d2-4b7e-b832-35cdf8732331",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -291,7 +226,7 @@
 									"body": "{\n  \"country\": \"United States\",\n  \"country_name\": \"USA\",\n  \"code\": \"US\",\n  \"flag\": \"🇺🇸\",\n  \"flag_img\": \"https://flagcdn.com/w320/us.png\",\n  \"flag_alt\": \"The flag of the United States of America is composed of thirteen equal horizontal bands of red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged innine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton.\"\n}"
 								},
 								{
-									"id": "1df453e5-b87f-4c03-9685-354e0a58dafe",
+									"id": "b929e426-de21-432f-bb7b-5ac2d76d461a",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -337,10 +272,10 @@
 							]
 						}
 					],
-					"id": "f918b385-1044-49f9-a10a-dd4bb2159646"
+					"id": "11bda442-f594-4f82-b349-83e23a5cbd2b"
 				}
 			],
-			"id": "2f950ded-23ed-4248-976a-aa3806cd599a"
+			"id": "dc8211d2-4230-43ea-8748-5014a2c873a6"
 		},
 		{
 			"name": "chatgpt",
@@ -350,7 +285,7 @@
 					"item": [
 						{
 							"name": "Get an AI generated sentence about the city",
-							"id": "b65fc344-53eb-40dc-8a47-604c3ad28833",
+							"id": "41cad864-35d3-432e-be6d-7a3b45438903",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -382,7 +317,7 @@
 							},
 							"response": [
 								{
-									"id": "7cfed0eb-f633-40ea-a216-a6f3198f15e6",
+									"id": "42fa8c27-f2a7-4b3f-916a-6362724738fe",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -426,7 +361,7 @@
 									"body": "{\n  \"id\": \"chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT\",\n  \"model\": \"gpt-3.5-turbo-0301\",\n  \"answer\": \"Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population.\",\n  \"question\": \"In one sentence, give me some information about the city: Miami\"\n}"
 								},
 								{
-									"id": "52913e01-1ec5-4cc9-a691-79e9417ae939",
+									"id": "ad888930-7697-4d80-91e2-c2d16ef4a40c",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -472,10 +407,10 @@
 							]
 						}
 					],
-					"id": "136d4e25-fd79-403e-921a-871724bf4227"
+					"id": "e6de703e-f43a-47f3-b83b-d7545f5cd21b"
 				}
 			],
-			"id": "bffe9e30-1a83-468f-bf92-c65e9b6f03c2"
+			"id": "2b9e24fa-8e38-42fa-a73a-b2646ad18b10"
 		}
 	],
 	"auth": {
@@ -490,7 +425,7 @@
 	},
 	"variable": [
 		{
-			"id": "80035263-624b-4321-90b9-3f4b6fa8bd9d",
+			"id": "31ffbc9e-8972-498a-a215-c78ae3a45d68",
 			"key": "baseUrl",
 			"value": "https://api.cointet.com"
 		}
