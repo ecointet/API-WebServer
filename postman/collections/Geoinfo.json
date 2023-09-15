@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "035734b3-c630-4dc4-91d0-ab7f4da8d23b",
+		"_postman_id": "13cd7727-1a7b-4285-ab5f-407b19d00266",
 		"name": "Geoinfo",
 		"description": "From a simple public IP you can get geographical information such as the City and Country",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "27516587-035734b3-c630-4dc4-91d0-ab7f4da8d23b"
+		"_uid": "27516587-13cd7727-1a7b-4285-ab5f-407b19d00266"
 	},
 	"item": [
 		{
@@ -15,7 +15,7 @@
 					"item": [
 						{
 							"name": "Locate an IP",
-							"id": "2b88ba0d-2d72-44da-b7b3-bfb5a36707c4",
+							"id": "b82a51db-bc79-4d43-baa0-abc4900c0e28",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -47,7 +47,7 @@
 							},
 							"response": [
 								{
-									"id": "4a00db46-aba2-447e-a3f0-7762a93feb67",
+									"id": "5e06f998-b592-4739-b122-089ea1de1f05",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -91,7 +91,7 @@
 									"body": "{\n  \"country\": \"United States\",\n  \"countryCode\": \"US\",\n  \"regionName\": \"Florida\",\n  \"city\": \"Miami\",\n  \"ip\": \"173.255.189.42\",\n  \"photo\": \"https://shorturl.at/eyMV7\",\n  \"description\": \"This city is a fake (Mock Server)\"\n}"
 								},
 								{
-									"id": "48d7b1c4-f642-4806-8db1-e84c4da7cfa0",
+									"id": "aee3ffea-63b0-4beb-b3dc-db028f279413",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -137,10 +137,10 @@
 							]
 						}
 					],
-					"id": "073c157e-e6a1-4e22-8f40-ab43b8906efc"
+					"id": "08bca346-3133-47f2-9d49-68284d8725b7"
 				}
 			],
-			"id": "5f4def3f-cb32-4770-9e0f-00fb73483cae"
+			"id": "6c058133-c66a-4467-8cb0-33098f7f51e1"
 		},
 		{
 			"name": "details",
@@ -150,7 +150,7 @@
 					"item": [
 						{
 							"name": "Get Country Details from a Country Code",
-							"id": "dd0f85c7-8811-42d0-9407-a09faab19b2e",
+							"id": "ec03a71d-1446-4529-a592-44af81a8837b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -182,7 +182,7 @@
 							},
 							"response": [
 								{
-									"id": "35fe6fa6-b1d2-4b7e-b832-35cdf8732331",
+									"id": "2aa249f6-6b8f-4562-b830-31e310b52898",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -226,7 +226,7 @@
 									"body": "{\n  \"country\": \"United States\",\n  \"country_name\": \"USA\",\n  \"code\": \"US\",\n  \"flag\": \"🇺🇸\",\n  \"flag_img\": \"https://flagcdn.com/w320/us.png\",\n  \"flag_alt\": \"The flag of the United States of America is composed of thirteen equal horizontal bands of red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged innine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton.\"\n}"
 								},
 								{
-									"id": "b929e426-de21-432f-bb7b-5ac2d76d461a",
+									"id": "596497ce-c770-46b5-a13f-128d6504aea6",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -272,10 +272,10 @@
 							]
 						}
 					],
-					"id": "11bda442-f594-4f82-b349-83e23a5cbd2b"
+					"id": "b57f5d87-fb99-4a1a-8a5c-95640c03794b"
 				}
 			],
-			"id": "dc8211d2-4230-43ea-8748-5014a2c873a6"
+			"id": "4b4ab2fb-ae84-4f82-9aaa-eaaf8c8ff038"
 		},
 		{
 			"name": "chatgpt",
@@ -285,7 +285,7 @@
 					"item": [
 						{
 							"name": "Get an AI generated sentence about the city",
-							"id": "41cad864-35d3-432e-be6d-7a3b45438903",
+							"id": "6d05da55-5e26-4543-af8f-57a6090b600c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -317,7 +317,7 @@
 							},
 							"response": [
 								{
-									"id": "42fa8c27-f2a7-4b3f-916a-6362724738fe",
+									"id": "48cd5140-12b4-4976-bc48-1dedcaae6f06",
 									"name": "Success",
 									"originalRequest": {
 										"method": "GET",
@@ -361,7 +361,7 @@
 									"body": "{\n  \"id\": \"chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT\",\n  \"model\": \"gpt-3.5-turbo-0301\",\n  \"answer\": \"Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population.\",\n  \"question\": \"In one sentence, give me some information about the city: Miami\"\n}"
 								},
 								{
-									"id": "ad888930-7697-4d80-91e2-c2d16ef4a40c",
+									"id": "b8d29e84-8a3b-4348-8286-6f9fe87f6b18",
 									"name": "Error",
 									"originalRequest": {
 										"method": "GET",
@@ -407,10 +407,10 @@
 							]
 						}
 					],
-					"id": "e6de703e-f43a-47f3-b83b-d7545f5cd21b"
+					"id": "c1fc0285-1434-4ed8-8fe9-6aa986b77b24"
 				}
 			],
-			"id": "2b9e24fa-8e38-42fa-a73a-b2646ad18b10"
+			"id": "ff71a74d-9793-4fd9-b345-ee9024a5dc05"
 		}
 	],
 	"auth": {
@@ -425,7 +425,7 @@
 	},
 	"variable": [
 		{
-			"id": "31ffbc9e-8972-498a-a215-c78ae3a45d68",
+			"id": "9051678c-ec8f-4478-a350-3f779ddea9f6",
 			"key": "baseUrl",
 			"value": "https://api.cointet.com"
 		}
