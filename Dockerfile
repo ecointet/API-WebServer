@@ -27,7 +27,7 @@ RUN set -ex; \
 
 ##NEW RELIC INSTALL
 RUN apt-get install sudo -y
-RUN curl -s -O https://download.newrelic.com/php_agent/release/newrelic-php5-10.12.0.1-linux.tar.gz
+RUN curl -s -O https://download.newrelic.com/php_agent/archive/10.12.0.1/newrelic-php5-10.12.0.1-linux.tar.gz
 RUN gzip -dc newrelic-php5-10.12.0.1-linux.tar.gz | tar xf -
 RUN sudo NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_SILENT=true NR_INSTALL_KEY=eu01xxd702aef43e61a27b1d81532cf3FFFFNRAL ./newrelic-php5-10.12.0.1-linux/newrelic-install install
 RUN sudo sed -i -e "s/newrelic.appname[[:space:]]=[[:space:]].*/newrelic.appname = \"api-webserver\"/" $(sudo php -r "echo(PHP_CONFIG_FILE_SCAN_DIR);")/newrelic.ini
