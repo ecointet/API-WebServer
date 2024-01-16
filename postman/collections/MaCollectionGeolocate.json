@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "6544b3cf-0bec-43da-a6f0-d86534b88904",
+		"name": "MaCollectionGeolocate",
+		"description": "From a simple public IP you can get geographical information such as the City and Country",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27516587-6544b3cf-0bec-43da-a6f0-d86534b88904"
+	},
+	"item": [
+		{
+			"name": "locate",
+			"item": [
+				{
+					"name": "{ip}",
+					"item": [
+						{
+							"name": "Locate an IP",
+							"id": "257ad750-26de-4624-b2b9-31a0916d0e30",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/locate/:ip/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"locate",
+										":ip",
+										""
+									],
+									"variable": [
+										{
+											"key": "ip",
+											"value": "46.8.173.77",
+											"description": "(Required) Public IP to locate"
+										}
+									]
+								},
+								"description": "Upon successful execution, returns a all known information about a public IP. \nThe API will also give a photo to illustrate the nearest city found.\n"
+							},
+							"response": [
+								{
+									"id": "f3f2eb40-364f-4aa5-aacf-742d4d03f442",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/locate/:ip/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"locate",
+												":ip",
+												""
+											],
+											"variable": [
+												{
+													"key": "ip"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"country\": \"United States\",\n  \"countryCode\": \"US\",\n  \"regionName\": \"Florida\",\n  \"city\": \"Miami\",\n  \"ip\": \"173.255.189.42\",\n  \"photo\": \"https://shorturl.at/eyMV7\",\n  \"description\": \"This city is a fake (Mock Server)\"\n}"
+								},
+								{
+									"id": "be26e9e5-6908-4526-bbec-5f7bfeaf2c59",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/locate/:ip/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"locate",
+												":ip",
+												""
+											],
+											"variable": [
+												{
+													"key": "ip"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
+								}
+							]
+						}
+					],
+					"id": "b69f7dc8-26f5-4b89-b935-b6f21e44b5f4"
+				}
+			],
+			"id": "4d31af29-9406-42fe-8f7e-281278d8040a"
+		},
+		{
+			"name": "details",
+			"item": [
+				{
+					"name": "{countryCode}",
+					"item": [
+						{
+							"name": "Get Country Details from a Country Code",
+							"id": "c9af52bf-b786-4a2d-9ac5-e7346a5968a6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/details/:countryCode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"details",
+										":countryCode"
+									],
+									"variable": [
+										{
+											"key": "countryCode",
+											"value": "US",
+											"description": "(Required) The Country Code"
+										}
+									]
+								},
+								"description": "Useful to check if a country exists, and get some details about it\n"
+							},
+							"response": [
+								{
+									"id": "0b9cce8d-c85b-496f-b7b8-78afe14b69f7",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/details/:countryCode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"details",
+												":countryCode"
+											],
+											"variable": [
+												{
+													"key": "countryCode"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"country\": \"United States\",\n  \"country_name\": \"USA\",\n  \"code\": \"US\",\n  \"flag\": \"🇺🇸\",\n  \"flag_img\": \"https://flagcdn.com/w320/us.png\",\n  \"flag_alt\": \"The flag of the United States of America is composed of thirteen equal horizontal bands of red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged innine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton.\"\n}"
+								},
+								{
+									"id": "acfbd630-8095-4dbb-abfb-52fb7b905c72",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/details/:countryCode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"details",
+												":countryCode"
+											],
+											"variable": [
+												{
+													"key": "countryCode"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
+								}
+							]
+						}
+					],
+					"id": "16a56757-f762-484f-9733-0b9c6562fbd5"
+				}
+			],
+			"id": "9fd60078-8f56-4aec-bf8a-761c41e10cac"
+		},
+		{
+			"name": "chatgpt",
+			"item": [
+				{
+					"name": "{city}",
+					"item": [
+						{
+							"name": "Get an AI generated sentence about the city",
+							"id": "8137d9d6-d905-4f9f-8532-90d59f9bb003",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/chatgpt/:city",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatgpt",
+										":city"
+									],
+									"variable": [
+										{
+											"key": "city",
+											"value": "Miami",
+											"description": "(Required) The City Name"
+										}
+									]
+								},
+								"description": "One short sentence to describe the city requested\n"
+							},
+							"response": [
+								{
+									"id": "f58e57cd-bf63-4ad2-b892-6ee4fd98b1e5",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/chatgpt/:city",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"chatgpt",
+												":city"
+											],
+											"variable": [
+												{
+													"key": "city"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT\",\n  \"model\": \"gpt-3.5-turbo-0301\",\n  \"answer\": \"Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population.\",\n  \"question\": \"In one sentence, give me some information about the city: Miami\"\n}"
+								},
+								{
+									"id": "799e70b0-318c-4fd6-a1c4-7b4e4d2b116f",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/chatgpt/:city",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"chatgpt",
+												":city"
+											],
+											"variable": [
+												{
+													"key": "city"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
+								}
+							]
+						}
+					],
+					"id": "006f6978-54ac-4482-88c3-67f3ade7e860"
+				}
+			],
+			"id": "66e5c9c2-2d37-4508-945e-f6c6ea8de76b"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "403ad783-4e4c-4bfd-96a1-0f0e9c77c4bc",
+			"key": "baseUrl",
+			"value": "https://api.cointet.com"
+		}
+	]
+}
