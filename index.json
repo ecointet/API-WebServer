@@ -1,0 +1,295 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "API GeoInfo",
+        "description": "From a simple public IP you can get geographical information such as the City and Country",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://geoinfo.azure-api.net"
+        }
+    ],
+    "paths": {
+        "/locate/NEW/{ip}": {
+            "get": {
+                "summary": "Locate an IP",
+                "description": "Upon successful execution, returns a all known information about a public IP. \nThe API will also give a photo to illustrate the nearest city found.\n",
+                "operationId": "get-locate-ip",
+                "parameters": [
+                    {
+                        "name": "ip",
+                        "in": "path",
+                        "description": "Public IP to locate",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/ip_param"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/locate"
+                                },
+                                "example": {
+                                    "country": "United States",
+                                    "countryCode": "US",
+                                    "regionName": "Florida",
+                                    "city": "Miami",
+                                    "ip": "173.255.189.42",
+                                    "photo": "https://shorturl.at/eyMV7",
+                                    "description": "This city is a fake (Mock Server)"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "message": "Error with your parameters"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/details/{countryCode}": {
+            "get": {
+                "summary": "Get Country Details from a Country Code",
+                "description": "Useful to check if a country exists, and get some details about it\n",
+                "operationId": "get-details-countrycode",
+                "parameters": [
+                    {
+                        "name": "countryCode",
+                        "in": "path",
+                        "description": "The Country Code",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/countryCode_param"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/details"
+                                },
+                                "example": {
+                                    "country": "United States",
+                                    "country_name": "USA",
+                                    "code": "US",
+                                    "flag": "🇺🇸",
+                                    "flag_img": "https://flagcdn.com/w320/us.png",
+                                    "flag_alt": "The flag of the United States of America is composed of thirteen equal horizontal bands of red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged innine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton."
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "message": "Error with your parameters"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/chatgpt/{city}": {
+            "get": {
+                "summary": "Get an AI generated sentence about the city",
+                "description": "One short sentence to describe the city requested\n",
+                "operationId": "get-chatgpt-city",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "description": "The City Name",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/city_param"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/chatgpt"
+                                },
+                                "example": {
+                                    "id": "chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT",
+                                    "model": "gpt-3.5-turbo-0301",
+                                    "answer": "Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population.",
+                                    "question": "In one sentence, give me some information about the city: Miami"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "message": "Error with your parameters"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "error": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Error with your parameters"
+                    }
+                }
+            },
+            "locate": {
+                "type": "object",
+                "properties": {
+                    "country": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "countryCode": {
+                        "type": "string",
+                        "example": "US"
+                    },
+                    "regionName": {
+                        "type": "string",
+                        "example": "Florida"
+                    },
+                    "city": {
+                        "type": "string",
+                        "example": "Miami"
+                    },
+                    "ip": {
+                        "type": "string",
+                        "example": "173.255.189.42"
+                    },
+                    "photo": {
+                        "type": "string",
+                        "example": "https://shorturl.at/eyMV7"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This city is a fake (Mock Server)"
+                    }
+                }
+            },
+            "details": {
+                "type": "object",
+                "properties": {
+                    "country": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "country_name": {
+                        "type": "string",
+                        "example": "USA"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "US"
+                    },
+                    "flag": {
+                        "type": "string",
+                        "example": "🇺🇸"
+                    },
+                    "flag_img": {
+                        "type": "string",
+                        "example": "https://flagcdn.com/w320/us.png"
+                    },
+                    "flag_alt": {
+                        "type": "string",
+                        "example": "The flag of the United States of America is composed of thirteen equal horizontal bands of red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged innine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton."
+                    }
+                }
+            },
+            "chatgpt": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT"
+                    },
+                    "model": {
+                        "type": "string",
+                        "example": "gpt-3.5-turbo-0301"
+                    },
+                    "answer": {
+                        "type": "string",
+                        "example": "Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population."
+                    },
+                    "question": {
+                        "type": "string",
+                        "example": "In one sentence, give me some information about the city: Miami"
+                    }
+                }
+            },
+            "city_param": {
+                "type": "string",
+                "example": "Miami"
+            },
+            "countryCode_param": {
+                "type": "string",
+                "example": "US"
+            },
+            "ip_param": {
+                "type": "string",
+                "example": "46.8.173.77"
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "Ocp-Apim-Subscription-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "subscription-key",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
