@@ -1,6 +1,11 @@
 <?php
+require "database/Store.php";
 require "src/tools.php";
 require "src/functions.php";
+
+//INIT DATABASE
+$databaseDirectory = __DIR__ . "/database/data";
+$data = new \SleekDB\Store("data", $databaseDirectory);
 
 //GET DATA
 $method = $_SERVER['REQUEST_METHOD'];
@@ -20,6 +25,8 @@ else
             $retour = SmartHome();
         if (strtolower($_GET['func']) == "explore")
             $retour = Explore($_GET['param']);
+        if (strtolower($_GET['func']) == "mock")
+            $retour = MockCache($_GET['param'], $data);
     }
     if ($method == 'POST') {
         echo "THIS IS A POST REQUEST";

@@ -18,6 +18,8 @@ function getRemoteContent($url, $headers = null, $data = null)
    //curl_setopt($curl, CURLOPT_VERBOSE, true);
    // curl_setopt($curl, CURLINFO_HEADER_OUT, true);
 
+   
+
     if ($headers)
     {
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers); 

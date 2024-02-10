@@ -129,6 +129,53 @@ function SmartHome()
     return(json_encode($n_json));
 }
 
+//GET MOCK CONTENT
+function GetMockContent($uid, $data, $cache)
+{
+    $mock = getRemoteContent("https://".$uid.".mock.pstmn.io/locate/");
+    $content =  [
+        "uid" => $uid,
+        "content" => $mock,
+        "cache_time" => time()
+    ];
+
+    if ($cache == null)
+        $cache = $data->insert($content);
+
+    $data->updateById($cache['_id'], $content);
+    $data->updateById($cache['_id'], [ "cache_time" => time() ]);
+
+    return($mock);
+}
+
+//CACHE SYSTEM
+function MockCache($uid, $data)
+{
+    $current_time = time();
+    $cache = $data->findOneBy(["uid", "=", $uid]);
+
+    if ($cache)
+    {
+        $diff = $current_time - $cache['cache_time'];
+        if ($diff > 5)
+            {
+                //LIVE MODE
+                $mock = GetMockContent($uid, $data, $cache);
+            }
+        else
+        {
+            $mock = $cache['content'];
+        }
+    }
+    else
+    {
+        //CACHE MODE
+        $mock = GetMockContent($uid, $data, null);
+    }
+
+    return($mock);
+}
+
 function error($data, $ip)
 {
     $n_json['ip'] = $ip;
