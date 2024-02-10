@@ -37,6 +37,10 @@ RUN sudo sed -i -e "s/newrelic.appname[[:space:]]=[[:space:]].*/newrelic.appname
 WORKDIR /var/www/html
 COPY . ./
 
+# CREATE THE FOLDER FOR THE DATABASE
+RUN mkdir -p /var/www/html/data
+RUN chmod -R 777 /var/www/html/data
+
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
 RUN a2enmod rewrite

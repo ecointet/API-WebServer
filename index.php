@@ -4,8 +4,8 @@ require "src/tools.php";
 require "src/functions.php";
 
 //INIT DATABASE
-$databaseDirectory = __DIR__ . "/database/data";
-$data = new \SleekDB\Store("data", $databaseDirectory);
+$databaseDirectory = __DIR__ . "/data";
+$data = new \SleekDB\Store("cache", $databaseDirectory);
 
 //GET DATA
 $method = $_SERVER['REQUEST_METHOD'];
