@@ -9,6 +9,7 @@ id = 77f64bc4-d350-45ea-9a13-e6e71c06fd6b
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"27516587-2bf13a52-cd16-4f79-92a0-a08c45b0c587","path":"MyGeoInfoCollection.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Paths\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
