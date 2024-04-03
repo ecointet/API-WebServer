@@ -1,0 +1,171 @@
+---
+openapi: 3.0.3
+info:
+  title: API GeoInfo
+  version: 1.0.0
+  description: From a simple public IP you can get geographical information such as the City and Country
+security:
+  - bearerAuth: []
+servers:
+  - url: https://api.cointet.com
+    description: Production server (live data)
+paths:
+  /locate/{ip}:
+    get:
+      summary: Locate an IP
+      description: |
+        Upon successful execution, returns a all known information about a public IP. 
+        The API will also give a photo to illustrate the nearest city found.
+      parameters:
+        - in: path
+          name: ip
+          description: Public IP to locate
+          required: true
+          schema:
+            $ref: '#/components/schemas/ip_param'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/locate'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /details/{countryCode}:
+    get:
+      summary: HOw to Get Country Details from a Country Code
+      description: |
+        Useful to check if a country exists, and get some details about it
+      parameters:
+        - in: path
+          name: countryCode
+          description: The Country Code
+          required: true
+          schema:
+            $ref: '#/components/schemas/countryCode_param'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/details'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /chatgpt/{city}:
+    get:
+      summary: Get an AI generated sentence about the city
+      description: |
+        One short sentence to describe the city requested
+      parameters:
+        - in: path
+          name: city
+          description: The City Name
+          required: true
+          schema:
+            $ref: '#/components/schemas/city_param'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chatgpt'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Error with your parameters"
+    locate:
+      type: object
+      properties:
+        country:
+          type: string
+          example: "United States"
+        countryCode:
+          type: string
+          example: "US"
+        regionName:
+          type: string
+          example: "Florida"
+        city:
+          type: string
+          example: "Miami"
+        ip:
+          type: string
+          example: "173.255.189.42"
+        photo:
+          type: string
+          example: "https://www.state.gov/wp-content/uploads/2022/01/shutterstock_469708088.jpg"
+        description:
+          type: string
+          example: "This city is a fake (Mock Server)"
+    details:
+      type: object
+      properties:
+        country:
+          type: string
+          example: "United States"
+        country_name:
+          type: string
+          example: "USA"
+        code:
+          type: string
+          example: "US"
+        flag:
+          type: string
+          example: "🇺🇸"
+        flag_img: 
+          type: string
+          example: "https://flagcdn.com/w320/us.png"
+        flag_alt: 
+          type: string
+          example: "The flag of the United States of America is composed of thirteen equal horizontal bands of \
+          red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged in\
+          nine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton."
+    chatgpt:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT"
+        model:
+          type: string
+          example: "gpt-3.5-turbo-0301"
+        answer:
+            type: string
+            example: "Miami is a coastal city in southeastern Florida known for its beaches, vibrant nightlife, and diverse population."
+        question:
+            type: string
+            example: "In one sentence, give me some information about the city: Miami"
+    city_param:
+      type: string
+      example: "Miami"
+    countryCode_param:
+      type: string
+      example: "US"
+    ip_param:
+      type: string
+      example: "46.8.173.77"
