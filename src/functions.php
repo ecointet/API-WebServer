@@ -87,8 +87,17 @@ function GetWaterCenters($country)
    $n_json['zipcode'] = "91";
    $n_json['name'] = "Usine de Saint-Maurice (en cours de construction)";
    $n_json['photo'] = "https://www.veolia.com/sites/g/files/dvc4206/files/styles/media/public/image/2023/07/Usine-depollution-eaux-usees-Rennes-429x528.jpg?h=62c1f40a&itok=fYijJxqy";
-    
-    return(json_encode($n_json));
+   $data[] =  $n_json;
+
+   $n_json['country'] = $country;
+   $n_json['countryCode'] = $country;
+   $n_json['cityName'] = "Versailles";
+   $n_json['zipcode'] = "78";
+   $n_json['name'] = "Usine de Versailles (en rénovation)";
+   $n_json['photo'] = "https://lh3.googleusercontent.com/ci/AL18g_S1O8bUPQ81tiI2OgkMvzwoFFHTYQBaFu_JV519PZo92gRnVyRtVEClNyDxk9q1MVEs6v-9BoA";
+   $data[] =  $n_json;
+
+    return(json_encode($data));
 }
 
 function ChatGPT($city)
