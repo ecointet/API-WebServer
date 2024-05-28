@@ -78,6 +78,19 @@ function DetailsFromCountry($country)
     return(json_encode($n_json));
 }
 
+//TEMP DEMO
+function GetWaterCenters($country)
+{
+   $n_json['country'] = $country;
+   $n_json['countryCode'] = $country;
+   $n_json['cityName'] = "Saint-Maurice";
+   $n_json['zipcode'] = "91";
+   $n_json['name'] = "Usine de Saint-Maurice (en cours de construction)";
+   $n_json['photo'] = "https://www.veolia.com/sites/g/files/dvc4206/files/styles/media/public/image/2023/07/Usine-depollution-eaux-usees-Rennes-429x528.jpg?h=62c1f40a&itok=fYijJxqy";
+    
+    return(json_encode($n_json));
+}
+
 function ChatGPT($city)
 {
     MirrorApiPython("chatgpt/".$city);

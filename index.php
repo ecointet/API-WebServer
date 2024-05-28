@@ -27,6 +27,8 @@ else
             $retour = Explore($_GET['param']);
         if (strtolower($_GET['func']) == "mock")
             $retour = MockCache($_GET['param'], $data);
+        if (strtolower($_GET['func']) == "getwater") //DEMO TMP
+            $retour = GetWaterCenters($_GET['param'], $data);
     }
     if ($method == 'POST') {
         echo "THIS IS A POST REQUEST";
