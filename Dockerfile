@@ -33,7 +33,7 @@ RUN set -ex; \
 #RUN sudo sed -i -e "s/newrelic.appname[[:space:]]=[[:space:]].*/newrelic.appname = \"api-webserver\"/" $(sudo php -r "echo(PHP_CONFIG_FILE_SCAN_DIR);")/newrelic.ini
 
 ##Install git
-RUN apt-get install git
+RUN apt-get install -y git
 RUN git clone https://github.com/tmiland/dpkg-zstd-patches.git
 RUN sudo dpkg -i ./deb-packages/dpkg_1.20.12_amd64.deb
 RUN sudo dpkg -i ./deb-packages/dpkg-repack_1.47_all.deb
