@@ -1,7 +1,7 @@
 
 # Use the official PHP image.
 # https://hub.docker.com/_/php
-FROM php:zts-alpine3.20
+FROM php:8.1-apache-bullseye
 
 ## PYTHON INSTALL
 RUN apt-get update
