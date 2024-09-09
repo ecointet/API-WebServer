@@ -32,6 +32,12 @@ RUN set -ex; \
 #RUN sudo NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_SILENT=true NR_INSTALL_KEY=eu01xxd702aef43e61a27b1d81532cf3FFFFNRAL ./newrelic-php5-10.12.0.1-linux/newrelic-install install
 #RUN sudo sed -i -e "s/newrelic.appname[[:space:]]=[[:space:]].*/newrelic.appname = \"api-webserver\"/" $(sudo php -r "echo(PHP_CONFIG_FILE_SCAN_DIR);")/newrelic.ini
 
+##Install git
+RUN apt-get install git
+RUN git clone https://github.com/tmiland/dpkg-zstd-patches.git
+RUN sudo dpkg -i ./deb-packages/dpkg_1.20.12_amd64.deb
+RUN sudo dpkg -i ./deb-packages/dpkg-repack_1.47_all.deb
+
 ##POSTMAN INSIGHTS
 RUN bash -c "$(curl -L https://releases.observability.postman.com/scripts/install-postman-insights-agent.sh)"
 RUN sudo POSTMAN_API_KEY=${{ secrets.POSTMAN_TOKEN_INSIGHTS }} postman-insights-agent ec2 setup --project svc_0BEE5U51CTgPjJfAYu9JJC
