@@ -33,7 +33,7 @@ RUN set -ex; \
 #RUN sudo sed -i -e "s/newrelic.appname[[:space:]]=[[:space:]].*/newrelic.appname = \"api-webserver\"/" $(sudo php -r "echo(PHP_CONFIG_FILE_SCAN_DIR);")/newrelic.ini
 
 ##POSTMAN INSIGHTS
-RUN bash -c "$(curl -L https://releases.observability.postman.com/scripts/install-postman-insights-agent.sh)"
+#RUN bash -c "$(curl -L https://releases.observability.postman.com/scripts/install-postman-insights-agent.sh)"
 #RUN POSTMAN_API_KEY=${{ secrets.POSTMAN_TOKEN_INSIGHTS }} postman-insights-agent ec2 setup --project svc_0BEE5U51CTgPjJfAYu9JJC
 
 # Copy in custom code from the host machine.
