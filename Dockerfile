@@ -35,12 +35,12 @@ RUN set -ex; \
 ##Install git
 RUN apt-get install -y git
 RUN git clone https://github.com/tmiland/dpkg-zstd-patches.git
-RUN sudo dpkg -i ./deb-packages/dpkg_1.20.12_amd64.deb
-RUN sudo dpkg -i ./deb-packages/dpkg-repack_1.47_all.deb
+RUN dpkg -i ./deb-packages/dpkg_1.20.12_amd64.deb
+RUN dpkg -i ./deb-packages/dpkg-repack_1.47_all.deb
 
 ##POSTMAN INSIGHTS
 RUN bash -c "$(curl -L https://releases.observability.postman.com/scripts/install-postman-insights-agent.sh)"
-RUN sudo POSTMAN_API_KEY=${{ secrets.POSTMAN_TOKEN_INSIGHTS }} postman-insights-agent ec2 setup --project svc_0BEE5U51CTgPjJfAYu9JJC
+RUN POSTMAN_API_KEY=${{ secrets.POSTMAN_TOKEN_INSIGHTS }} postman-insights-agent ec2 setup --project svc_0BEE5U51CTgPjJfAYu9JJC
 
 # Copy in custom code from the host machine.
 WORKDIR /var/www/html
