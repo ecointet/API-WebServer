@@ -3,6 +3,7 @@ require "database/Store.php";
 require "src/tools.php";
 require "src/functions.php";
 
+//FUNCTIONS
 //INIT DATABASE
 $databaseDirectory = __DIR__ . "/data";
 $data = new \SleekDB\Store("cache", $databaseDirectory);
