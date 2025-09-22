@@ -1,0 +1,458 @@
+{
+	"info": {
+		"_postman_id": "27516587-ca7fca9d-0a63-4071-9093-90615fb491e9",
+		"name": "Ma Collection Generee",
+		"description": "From a simple public IP you can get geographical information such as the City and Country",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "locate",
+			"item": [
+				{
+					"name": "NEW",
+					"item": [
+						{
+							"name": "{ip}",
+							"item": [
+								{
+									"name": "Locate an IP",
+									"id": "27516587-d44142b9-cca6-47e6-ae24-2e7b24d0d1c9",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/locate/NEW/:ip?nouvelle cle",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"locate",
+												"NEW",
+												":ip"
+											],
+											"query": [
+												{
+													"key": "nouvelle cle",
+													"value": null,
+													"type": "text"
+												}
+											],
+											"variable": [
+												{
+													"key": "ip",
+													"value": "46.8.173.77",
+													"description": "(Required) Public IP to locate"
+												}
+											]
+										},
+										"description": "Upon successful execution, returns a all known information about a public IP. \nThe API will also give a photo to illustrate the nearest city found.\n"
+									},
+									"response": [
+										{
+											"id": "27516587-448c1336-2420-4403-a46c-cc0eb33e543e",
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/locate/NEW/:ip",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"locate",
+														"NEW",
+														":ip"
+													],
+													"variable": [
+														{
+															"key": "ip"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"country\": \"France\",\n  \"countryCode\": \"FR\",\n  \"regionName\": \"“Ile de France\\\"\",\n  \"city\": \"Paris\",\n  \"ip\": \"173.255.189.42\",\n  \"photo\": \"https://etias.com/assets/uploads/8%20Things%20To%20Do%20in%20Paris,%20France.jpg\",\n  \"description\": \"“The capital of France.\\\"\"\n}"
+										},
+										{
+											"id": "27516587-420f754d-f7ae-4682-96d8-f292554c49b9",
+											"name": "Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/locate/NEW/:ip",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"locate",
+														"NEW",
+														":ip"
+													],
+													"variable": [
+														{
+															"key": "ip"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"message\": \"Error with your parameters\"\n}"
+										}
+									]
+								}
+							],
+							"id": "27516587-50bfee8e-cb57-4aed-9340-c4da7bcc8159"
+						}
+					],
+					"id": "27516587-9171012a-4d9b-46b1-9b1e-f2a1efa69752"
+				}
+			],
+			"id": "27516587-65fa56f6-fdf5-49c8-a310-6628372f121e"
+		},
+		{
+			"name": "details",
+			"item": [
+				{
+					"name": "{countryCode}",
+					"item": [
+						{
+							"name": "Get Country Details from a Country Code",
+							"id": "27516587-3715ecce-34d1-4841-8f1e-f3c1a6ea8a3e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/details/:countryCode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"details",
+										":countryCode"
+									],
+									"variable": [
+										{
+											"id": "bdde14a9-ddc5-4a19-9993-7afdd1db67c1",
+											"key": "countryCode",
+											"value": "FR",
+											"description": "(Required) The Country Code"
+										}
+									]
+								},
+								"description": "Useful to check if a country exists, and get some details about it\n"
+							},
+							"response": [
+								{
+									"id": "27516587-fc02b0bb-4ffd-467c-8533-3e95239b907a",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/details/:countryCode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"details",
+												":countryCode"
+											],
+											"variable": [
+												{
+													"key": "countryCode"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"country\": \"France\",\n  \"country_name\": \"France\",\n  \"code\": \"FR\",\n  \"flag\": \"🇫🇷\",\n  \"flag_img\": \"https://flagcdn.com/w320/fr.png\",\n  \"flag_alt\": \"The flag of the French country\"\n}"
+								},
+								{
+									"id": "27516587-22fd8c3d-68f5-4c33-93bb-5ab1fb0d8554",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/details/:countryCode",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"details",
+												":countryCode"
+											],
+											"variable": [
+												{
+													"key": "countryCode"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
+								}
+							]
+						}
+					],
+					"id": "27516587-858756de-e08c-459c-a96a-2a3e26b8ab6b"
+				}
+			],
+			"id": "27516587-4d93e033-1842-470b-bb73-1bf526b8db82"
+		},
+		{
+			"name": "chatgpt",
+			"item": [
+				{
+					"name": "{city}",
+					"item": [
+						{
+							"name": "Get an AI generated sentence about the city",
+							"id": "27516587-021cac80-9330-46f3-9d2b-0e0b8b6a385e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/chatgpt/:city",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatgpt",
+										":city"
+									],
+									"variable": [
+										{
+											"id": "b399f02a-1469-4015-a888-3203e3655680",
+											"key": "city",
+											"value": "Paris",
+											"description": "(Required) The City Name"
+										}
+									]
+								},
+								"description": "One short sentence to describe the city requested\n"
+							},
+							"response": [
+								{
+									"id": "27516587-3f073893-a6f9-41b9-972e-8d896b6e03b4",
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/chatgpt/:city",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"chatgpt",
+												":city"
+											],
+											"variable": [
+												{
+													"key": "city"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"id\": \"chatcmpl-7MyOB5F7foDg3ELbxqjgpOQJm4QWT\",\n  \"model\": \"gpt-3.5-turbo-0301\",\n  \"answer\": \"Paris is a  city in France, vibrant nightlife, and diverse population.\",\n  \"question\": \"In one sentence, give me some information about the city: Paris\"\n}"
+								},
+								{
+									"id": "27516587-7deb7e22-d22f-4076-8d69-7addcad6d2c5",
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/chatgpt/:city",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"chatgpt",
+												":city"
+											],
+											"variable": [
+												{
+													"key": "city"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"message\": \"Error with your parameters\"\n}"
+								}
+							]
+						}
+					],
+					"id": "27516587-74de03b0-ea05-4647-8800-76254c7e7439"
+				}
+			],
+			"id": "27516587-0174f1f6-572e-4bd9-8b7e-4af704bad86e"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.cointet.com"
+		}
+	]
+}
