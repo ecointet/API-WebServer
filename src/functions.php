@@ -174,6 +174,17 @@ function GetMockContent($uid, $data, $cache)
     return($mock);
 }
 
+//GET LOGIN (BANK DEMO)
+function GetLogin($param, $data)
+{
+    $n_json['firstname'] = "Etienne";
+    $n_json['lastname'] = "Cointet";
+    $n_json['total'] = "- 4 543 EUR";
+    $n_json['status'] = "Broke 😢";
+
+    return(json_encode($n_json));
+}
+
 //CACHE SYSTEM
 function MockCache($uid, $data)
 {
