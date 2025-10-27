@@ -180,21 +180,28 @@ function GetLogin($param, $data)
     if ($param == "ecointet")
     {
         $n_json['firstname'] = "Etienne";
-        $n_json['lastname'] = "Cointet";
+        $n_json['lastname'] = "COINTET";
         $n_json['total'] = "- 4543 EUR";
         $n_json['status'] = "Broke 😢";
     }
     else if ($param == "sdubois")
     {
         $n_json['firstname'] = "Stéphane";
-        $n_json['lastname'] = "Dubois";
+        $n_json['lastname'] = "DUBOIS";
         $n_json['total'] = "+ 54454300 EUR";
         $n_json['status'] = "Healthy 💰";
+    }
+     else if ($param == "doliva")
+    {
+        $n_json['firstname'] = "Diego";
+        $n_json['lastname'] = "Oliva";
+        $n_json['total'] = "+ 68955785 EUR";
+        $n_json['status'] = "Very Healthy 💰";
     }
     else 
         $n_json['status'] = "Error - user not found";
 
-
+    $n_json['last_update'] = date("l jS \of F Y h:i:s A");
     return(json_encode($n_json));
 }
 
