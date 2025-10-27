@@ -177,10 +177,23 @@ function GetMockContent($uid, $data, $cache)
 //GET LOGIN (BANK DEMO)
 function GetLogin($param, $data)
 {
-    $n_json['firstname'] = "Etienne";
-    $n_json['lastname'] = "Cointet";
-    $n_json['total'] = "- 4 543 EUR";
-    $n_json['status'] = "Broke 😢";
+    if ($param == "ecointet")
+    {
+        $n_json['firstname'] = "Etienne";
+        $n_json['lastname'] = "Cointet";
+        $n_json['total'] = "- 4543 EUR";
+        $n_json['status'] = "Broke 😢";
+    }
+    else if ($param == "sdubois")
+    {
+        $n_json['firstname'] = "Stéphane";
+        $n_json['lastname'] = "Dubois";
+        $n_json['total'] = "+ 54454300 EUR";
+        $n_json['status'] = "Healthy 💰";
+    }
+    else 
+        $n_json['status'] = "Error - user not found";
+
 
     return(json_encode($n_json));
 }
