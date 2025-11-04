@@ -181,22 +181,22 @@ function GetLogin($param, $data)
     {
         $n_json['firstname'] = "Etienne";
         $n_json['lastname'] = "COINTET";
-        $n_json['total'] = "- 4543 EUR";
+        $n_json['total'] = "- 4 543 EUR";
         $n_json['status'] = "Broke 😢";
     }
     else if ($param == "sdubois")
     {
         $n_json['firstname'] = "Stéphane";
         $n_json['lastname'] = "DUBOIS";
-        $n_json['total'] = "+ 54454300 EUR";
-        $n_json['status'] = "Healthy 💰";
+        $n_json['total'] = "+ 54 454 300 EUR";
+        $n_json['status'] = "wealthy person 💰";
     }
      else if ($param == "doliva")
     {
         $n_json['firstname'] = "Diego";
         $n_json['lastname'] = "Oliva";
-        $n_json['total'] = "+ 68955785 EUR";
-        $n_json['status'] = "Very Healthy 💰";
+        $n_json['total'] = "+ 68 955 785 GBP";
+        $n_json['status'] = "very very wealthy person 💰";
     }
     else 
         $n_json['status'] = "Error - user not found";
