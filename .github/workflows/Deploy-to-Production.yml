@@ -111,7 +111,7 @@ jobs:
         run: echo ${{ steps.deploy.outputs.url }}
 
       # RUN TESTS WITH POSTMAN
-  automated-api-tests-with-postman:
+  automated-api-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -122,4 +122,4 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "27245430-4ce36ade-05c3-449b-b54b-8f90010c5017"
+          postman collection run "27245430-3a36bfa5-0369-4ba5-8b89-531c1114313f" -e "27245430-6527193c-9c78-4b35-bfd1-62ca87a06867" --report-event
