@@ -32,6 +32,8 @@ else
             $retour = GetWaterCenters($_GET['param'], $data);
         if (strtolower($_GET['func']) == "login")
             $retour = GetLogin($_GET['param'], $data);
+        if (strtolower($_GET['func']) == "getdata")
+            $retour = GetData($_GET['param'], $data);
     }
     if ($method == 'POST') {
         echo "THIS IS A POST REQUEST";
