@@ -86,7 +86,7 @@ function GetData($txt)
    
    $n_json['data'] = $txt;
    //$n_json['img'] = "empty";
-      $n_json['img'] = "https://api.server.com/api/img/passport-clement.jpg"; //fix-bug-if-no-image-provided-by-api
+      $n_json['img'] = "https://api.cointet.com/api/img/passport-clement.jpg"; //fix-bug-if-no-image-provided-by-api
 
   return(json_encode($n_json));
 }
