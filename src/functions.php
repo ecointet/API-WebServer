@@ -81,7 +81,7 @@ function DetailsFromCountry($country)
 //Simple GetData (Echo Mode)
 function GetData($txt)
 {
-    //MirrorApiPython("GetData/".$txt);
+    MirrorApiPython("GetData/".$txt);
    // $data = getRemoteContent("https://restcountries.com/v3.1/alpha/".$country); //Get Details from
    
    $n_json['data'] = $txt;
