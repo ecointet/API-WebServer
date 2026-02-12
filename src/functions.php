@@ -85,7 +85,8 @@ function GetData($txt)
    // $data = getRemoteContent("https://restcountries.com/v3.1/alpha/".$country); //Get Details from
    
    $n_json['data'] = $txt;
-    //  $n_json['img'] = "https://api.cointet.com/api/img/passport-clement.jpg"; //fix-bug-if-no-image-provided-by-api
+   $n_json['file'] = "/get-file.jpg";
+    //  $n_json['content'] = "https://api.cointet.com/api/img/passport-clement.jpg"; //my-fix-but-it-is-friday-so-no-time-to-fix-it-properly :D
 
   return(json_encode($n_json));
 }
