@@ -86,6 +86,7 @@ function GetData($txt)
    
    $n_json['data'] = $txt;
    $n_json['file'] = "/get-file.jpg";
+   $n_json['content'] = "https://api.cointet.com/api/img/passport-clement.jpg";
     //  $n_json['content'] = "https://api.cointet.com/api/img/passport-clement.jpg"; //my-fix-but-it-is-friday-so-no-time-to-fix-it-properly :D
 
   return(json_encode($n_json));
