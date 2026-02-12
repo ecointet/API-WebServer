@@ -123,7 +123,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests (PROD)
         run: |
-          postman collection run "52318218-4d3d72c0-374f-402d-9e3c-b56157cf36a2" -e "52318218-f4b85295-59e6-406b-bee4-81318ceba7b8"
+          postman collection run "52318218-4d3d72c0-374f-402d-9e3c-b56157cf36a2" -e "52318218-f4b85295-59e6-406b-bee4-81318ceba7b8" --report-events
   # RUN MOCK TESTS WITH POSTMAN
   mock-api-tests:
     runs-on: ubuntu-latest
@@ -136,4 +136,4 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests (MOCK)
         run: |
-          postman collection run "52318218-4d3d72c0-374f-402d-9e3c-b56157cf36a2" -e "52318218-dabc24ec-53de-44a4-89c7-7d2d42175c58"
+          postman collection run "52318218-4d3d72c0-374f-402d-9e3c-b56157cf36a2" -e "52318218-dabc24ec-53de-44a4-89c7-7d2d42175c58" --report-events
