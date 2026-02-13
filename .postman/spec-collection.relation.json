@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "spec": "../postman/specs/France Portal API/index.yaml",
+      "collection": "../postman/collections/local-france-portal-collection.postman_collection.json",
+      "syncOptions": {
+        "syncExamples": false
+      }
+    }
+  ]
+}

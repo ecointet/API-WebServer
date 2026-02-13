@@ -1,0 +1,200 @@
+{
+  "item": [
+    {
+      "name": "getdata",
+      "description": "",
+      "item": [
+        {
+          "name": "{document}",
+          "description": "",
+          "item": [
+            {
+              "id": "1be8e42b-734a-4414-8cb2-0beabfa0a69b",
+              "name": "Retrieve a Document",
+              "request": {
+                "name": "Retrieve a Document",
+                "description": {
+                  "content": "This endpoint allows you to retrieve an official document from the French government. You can specify the type of document you want to retrieve, such as a birth certificate, marriage certificate, or death certificate.\n",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "getdata",
+                    ":document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "type": "any",
+                      "value": "birth_certificate",
+                      "key": "document",
+                      "disabled": false,
+                      "description": {
+                        "content": "The exact name of the document.",
+                        "type": "text/plain"
+                      }
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {},
+                "auth": null
+              },
+              "response": [
+                {
+                  "id": "f80b1221-5cc6-42e8-8754-8ba49b5dc55a",
+                  "name": "Success",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "getdata",
+                        ":document"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "The exact name of the document.",
+                            "type": "text/plain"
+                          },
+                          "type": "any",
+                          "value": "birth_certificate",
+                          "key": "document"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"document\": \"birth_certificate\",\n  \"content\": \"Official document content goes here.\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                },
+                {
+                  "id": "b48646e4-a74f-42e4-9285-ff575f614abd",
+                  "name": "Error",
+                  "originalRequest": {
+                    "url": {
+                      "path": [
+                        "getdata",
+                        ":document"
+                      ],
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "query": [],
+                      "variable": [
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "The exact name of the document.",
+                            "type": "text/plain"
+                          },
+                          "type": "any",
+                          "value": "birth_certificate",
+                          "key": "document"
+                        }
+                      ]
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": {
+                          "content": "Added as a part of security scheme: bearer",
+                          "type": "text/plain"
+                        },
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "body": {}
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": "{\n  \"message\": \"Error with your parameters\"\n}",
+                  "cookie": [],
+                  "_postman_previewlanguage": "json"
+                }
+              ],
+              "event": [],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "type": "any",
+        "value": "{{bearerToken}}",
+        "key": "token"
+      }
+    ]
+  },
+  "event": [],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cointet.com"
+    }
+  ],
+  "info": {
+    "_postman_id": "d77b863c-f116-459e-b709-7cef6e919133",
+    "name": "Local France Portal Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "All your French Services in one API.",
+      "type": "text/plain"
+    }
+  }
+}

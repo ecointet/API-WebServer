@@ -1,0 +1,61 @@
+---
+openapi: 3.0.3
+info:
+  title: France Portal API
+  version: 1.0.0
+  description: All your French Services in one API.
+security:
+  - bearerAuth: []
+servers:
+  - url: https://api.cointet.com
+    description: Production server (live data)
+paths:
+  /getdata/{document}:
+    get:
+      summary: Retrieve a Document
+      description: |
+        This endpoint allows you to retrieve an official document from the French government. You can specify the type of document you want to retrieve, such as a birth certificate, marriage certificate, or death certificate.
+      parameters:
+        - in: path
+          name: document
+          description: The exact name of the document.
+          required: true
+          schema:
+            $ref: '#/components/schemas/document_param'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getdata'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Error with your parameters"
+    getdata:
+      type: object
+      properties:
+        document:
+          type: string
+          example: "birth_certificate"
+        content:
+          type: string
+          example: "Official document content goes here."
+    document_param:
+      type: string
+      example: "birth_certificate"
