@@ -1,11 +1,16 @@
 {
   "workspace": {
-    "id": "714a48a7-9211-4dbe-8a0d-d4336cde995a"
+    "id": "d77b863c-f116-459e-b709-7cef6e919133"
   },
   "entities": {
-    "collections": [],
     "environments": [],
-    "specs": [],
-    "flows": []
+    "flows": [],
+    "globals": [],
+    "mocks": [],
+    "specs": [
+      "../api/definition.yml",
+      "../api-content/schema.yml"
+    ],
+    "collections": []
   }
 }
