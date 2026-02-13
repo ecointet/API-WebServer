@@ -136,7 +136,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests (PROD)
         run: |
-          postman collection run "postman/collection/local-france-portal-collection.postman_collection.json" --report-events
+          postman collection run "postman/collections/local-france-portal-collection.postman_collection.json" --report-events
   # RUN MOCK TESTS WITH POSTMAN
   mock-api-tests:
     runs-on: ubuntu-latest
