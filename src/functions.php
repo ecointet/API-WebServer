@@ -86,7 +86,7 @@ function GetData($txt)
    
    $n_json['data'] = $txt;
    $n_json['file'] = "/get-file.jpg";
-   $n_json['content'] = "https://api.cointet.com/api/img/passport-clement.jpg"; //Uncomment to fix the issue with the field content missing.
+   $n_json['content'] = "https://api.cointet.com/api/img/edenred.webp"; //Uncomment to fix the issue with the field content missing.
   
     return(json_encode($n_json));
 }
