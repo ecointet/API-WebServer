@@ -1,0 +1,38 @@
+{
+  "info": {
+    "_postman_id": "49e8f455-d3a0-4214-99d9-7f790770a310",
+    "name": "Web Auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth & Get User",
+      "id": "dc2d2eb6-c32d-4a30-9d8c-94b530a8016c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://postman-echo.com/Get?user={{user}}",
+          "protocol": "https",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "Get"
+          ],
+          "query": [
+            {
+              "key": "user",
+              "value": "{{user}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
