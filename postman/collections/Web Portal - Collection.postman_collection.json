@@ -1,0 +1,251 @@
+{
+  "info": {
+    "_postman_id": "4d3d72c0-374f-402d-9e3c-b56157cf36a2",
+    "name": "Web Portal - Collection",
+    "description": "All your French Services in one API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Retrieve a Document",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "084443cc-c49f-415e-8e66-1215ebcd4b6d",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response is JSON\", function () {",
+              "    pm.response.to.be.json;",
+              "});",
+              "",
+              "",
+              "pm.test(\"Body has 'data' field\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('data');",
+              "});",
+              "",
+              "pm.test(\"Check if the field 'content' is there\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('content');",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "8973cd1d-1555-44d5-af25-4b5cf8459f0e",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/getdata/:document",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "getdata",
+            ":document"
+          ],
+          "variable": [
+            {
+              "key": "document",
+              "value": "{{document}}",
+              "description": "The exact name of the document."
+            }
+          ]
+        },
+        "description": "This endpoint allows you to retrieve an official document from the French government. You can specify the type of document you want to retrieve, such as a birth certificate, marriage certificate, or death certificate.\n"
+      },
+      "response": [
+        {
+          "id": "f5d04e83-70ab-4aca-926a-9ec09b58dfa6",
+          "name": "Error",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getdata/:document",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getdata",
+                ":document"
+              ],
+              "variable": [
+                {
+                  "key": "document",
+                  "value": "birth_certificate",
+                  "description": "The exact name of the document."
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n  \"message\": \"Error with your parameters\"\n}"
+        },
+        {
+          "id": "d75da869-0d56-47d4-a984-7a8c2a1192f3",
+          "name": "Success",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getdata/:document",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getdata",
+                ":document"
+              ],
+              "variable": [
+                {
+                  "key": "document",
+                  "value": "{{document}}",
+                  "description": "The exact name of the document."
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 18 Feb 2026 09:03:22 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "x-srv-trace",
+              "value": "v=1;t=9d4040aa49666125"
+            },
+            {
+              "key": "x-srv-span",
+              "value": "v=1;s=0eb39416dfb30b9e"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "x-ratelimit-limit",
+              "value": "120"
+            },
+            {
+              "key": "x-ratelimit-remaining",
+              "value": "117"
+            },
+            {
+              "key": "x-ratelimit-reset",
+              "value": "1771405424"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"75-a1QyOpdijJEFmJfKqq65oCf8Hng\""
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-envoy-upstream-service-time",
+              "value": "236"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "__cf_bm=jduxahymRNXzRygaKFYClSNVKp_PyVEM6_TyOAlIYYk-1771405402-1.0.1.1-Xw34R2uzmusCpqx5jDKt8AewHXUH8JzikW_Cr190np.wa8ypE35EeN89ccy.EXY0U5aoh1Fq4Q7w9Qrvtb674xs5NZA1FLsxwdexZCh8Djo; path=/; expires=Wed, 18-Feb-26 09:33:22 GMT; domain=.pstmn.io; HttpOnly; Secure; SameSite=None"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "9cfc59d27cec99d9-CDG"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n    \"document\": \"birth_certificate\",\n    \"content\": \"https://old.civil.ge/files/images/2012/Passport-PolicePhoto.jpg\"\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cointet.com",
+      "type": "any"
+    }
+  ]
+}
