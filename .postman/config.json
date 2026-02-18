@@ -1,16 +1,18 @@
 {
   "workspace": {
-    "id": "d77b863c-f116-459e-b709-7cef6e919133"
+    "id": "0509d44e-0b48-4bce-bb1a-bd9ef1fdb98a"
   },
   "entities": {
-    "environments": [],
-    "flows": [],
-    "globals": [],
-    "mocks": [],
-    "specs": [
-      "../api/definition.yml",
-      "../api-content/schema.yml"
+    "collections": [
+      "../postman/collections/Web Auth.postman_collection.json",
+      "../postman/collections/Web Portal - Collection.postman_collection.json"
     ],
-    "collections": []
+    "environments": [
+      "../postman/environments/Prod Web Portal.postman_environment.json",
+      "../postman/environments/Mock - Get Document.postman_environment.json"
+    ],
+    "specs": [],
+    "flows": [],
+    "globals": []
   }
 }
