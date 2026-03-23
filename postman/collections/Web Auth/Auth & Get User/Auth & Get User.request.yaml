@@ -1,8 +1,0 @@
-method: GET
-name: Auth & Get User
-order: 1770975966951
-queryParams:
-  - key: user
-    value: "{{user}}"
-type: http
-url: https://postman-echo.com/Get?user={{user}}
