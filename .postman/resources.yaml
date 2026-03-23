@@ -1,0 +1,17 @@
+# Use this workspace to collaborate
+workspace:
+  id: 2853d322-fd71-44b6-aaed-cabd13c85512
+
+localResources:
+  specs:
+    - ../api/definition.yml
+    - ../api-content/schema.yml
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+cloudResources:
+  collections:
+    ../postman/collections/Get Official Document: 52318218-f6c27854-a4e1-4bbc-9af3-83a325ade3d0
+  specs:
+    ../api/definition.yml: e4db2512-387f-435d-8268-e300451e0130
+    ../postman/specs/index.yaml: d5cf5967-7a36-4bed-be55-231b599bae45
+    ../api-content/schema.yml: 0fdee3c8-369e-48f3-a4ac-f96b67742c6b

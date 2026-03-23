@@ -1,0 +1,11 @@
+$kind: collection
+name: Get Official Document
+description: All your Services in one API.
+variables:
+  url: https://api.cointet.com
+auth:
+  - id: 8b38c8bc-6c66-4cb9-81cb-498b12d2129f
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{bearerToken}}"

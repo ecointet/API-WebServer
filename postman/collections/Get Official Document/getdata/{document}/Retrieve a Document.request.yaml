@@ -1,0 +1,17 @@
+$kind: http-request
+name: Retrieve a Document
+description: >
+  This endpoint allows you to retrieve an official document from the French
+  government. You can specify the type of document you want to retrieve, such as
+  a birth certificate, marriage certificate, or death certificate.
+url: "{{url}}/getdata/:document"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  document: birth_certificate
+body:
+  type: text
+  content: ""
+examples: ./.resources/Retrieve a Document.resources/examples
+order: 1000

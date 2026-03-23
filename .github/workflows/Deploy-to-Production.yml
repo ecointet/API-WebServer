@@ -123,7 +123,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests (PROD)
         run: |
-          postman collection run 52318218-13b56eb9-cf32-4e65-991d-cfbb714fb7cc -e 52318218-52e1ad66-401c-42d2-b76f-1a0ca2e4351f --report-events
+          postman collection run 52318218-f6c27854-a4e1-4bbc-9af3-83a325ade3d0 --report-events
   # RUN LOCAL TESTS WITH POSTMAN
   automated-api-local-tests:
     runs-on: ubuntu-latest
@@ -149,7 +149,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests (MOCK)
         run: |
-          postman collection run "52318218-4d3d72c0-374f-402d-9e3c-b56157cf36a2" -e "52318218-dabc24ec-53de-44a4-89c7-7d2d42175c58" --report-events
+          postman collection run "52318218-f6c27854-a4e1-4bbc-9af3-83a325ade3d0" -e "52318218-6dc23c65-eb23-4d63-8d16-c9c01cc0baf3" --report-events
 
    # RUN API GOVERNANCE TESTS WITH POSTMAN
   governance-api-linter:
@@ -163,5 +163,5 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run Governance tests (Linter)
         run: |
-          postman spec lint "691ee520-2f16-409e-b3b9-8da9ae8d7197" --report-events
+          postman spec lint "d5cf5967-7a36-4bed-be55-231b599bae45" --report-events
   
