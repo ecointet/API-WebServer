@@ -124,6 +124,7 @@ jobs:
       - name: Run API tests (PROD)
         run: |
           postman collection run "52318218-4d3d72c0-374f-402d-9e3c-b56157cf36a2" -e "52318218-f4b85295-59e6-406b-bee4-81318ceba7b8" --report-events
+          postman collection run 52318218-13b56eb9-cf32-4e65-991d-cfbb714fb7cc -e 52318218-52e1ad66-401c-42d2-b76f-1a0ca2e4351f --report-events
   # RUN LOCAL TESTS WITH POSTMAN
   automated-api-local-tests:
     runs-on: ubuntu-latest
@@ -164,4 +165,5 @@ jobs:
       - name: Run Governance tests (Linter)
         run: |
           postman spec lint "bfb2d669-87f0-48dd-85ea-62cdea0a1374" --report-events
+          postman spec lint "691ee520-2f16-409e-b3b9-8da9ae8d7197" --report-events
   
