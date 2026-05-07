@@ -85,7 +85,8 @@ function GetData($txt)
    // $data = getRemoteContent("https://restcountries.com/v3.1/alpha/".$country); //Get Details from
    
    $n_json['data'] = $txt;
-   //$n_json['file'] = "/get-file.jpg";
+   $n_json['content'] = "/get-file.jpg";
+   $n_json['uid'] = "877hhjjUUiiLL9jjn";
    $n_json['file'] = "https://api.cointet.com/api/img/passport.jpeg"; //Uncomment to fix the issue with the field content missing.
   
     return(json_encode($n_json));
