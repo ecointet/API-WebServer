@@ -1,10 +1,10 @@
 $kind: collection
-name: Get Official Document
-description: All your Services in one API.
+description: API specification generated from the PHP routing and response code.
 variables:
   url: https://api.cointet.com
+  baseUrl: https://api.cointet.com
 auth:
-  - id: 8b38c8bc-6c66-4cb9-81cb-498b12d2129f
+  - id: 47f64b22-b080-4982-9a06-70ee7f281f8e
     type: bearer
     name: bearer auth
     credentials:

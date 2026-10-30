@@ -1,0 +1,55 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/login/:param"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: param
+      value: string
+      disabled: false
+      description: Function-specific input value.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "firstname": "string",
+        "lastname": "string",
+        "total": "string",
+        "internal_note": "string",
+        "status": "string",
+        "last_update": "string"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "total": {
+            "type": "string"
+          },
+          "internal_note": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "last_update": {
+            "type": "string"
+          }
+        }
+      }
+order: 1000

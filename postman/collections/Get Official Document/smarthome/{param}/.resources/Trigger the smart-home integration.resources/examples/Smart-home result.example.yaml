@@ -1,0 +1,60 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/smarthome/:param"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: param
+      value: string
+      disabled: false
+      description: Function-specific input value.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "country": "string",
+        "countryCode": "string",
+        "regionName": "string",
+        "city": "string",
+        "ip": "string",
+        "description": "string",
+        "photo": "https://DNuQQJWJOdCIGbreaygOajpziwfl.ltlj6y6Jer7RqDxjaWWfcyJt,FuBI9lAGWXUYTN,fGGHcxaaEANN84g3"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "regionName": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+order: 1000

@@ -1,0 +1,44 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/explore/:param"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: param
+      value: string
+      disabled: false
+      description: Function-specific input value.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "city": "string",
+        "description": "string",
+        "photo": "http://GWblXdMYXRaNJRXDzKEOfPz.bswBV0GycZSgZlLfMzdmBtF,2+sM7daypl39q6e9zXqU-GkyCrVMF"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+order: 1000

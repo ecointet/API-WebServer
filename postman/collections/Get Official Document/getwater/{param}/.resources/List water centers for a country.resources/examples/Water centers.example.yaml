@@ -1,0 +1,79 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/getwater/:param"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: param
+      value: string
+      disabled: false
+      description: Function-specific input value.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      [
+        {
+          "country": "string",
+          "countryCode": "string",
+          "cityName": "string",
+          "zipcode": "string",
+          "gps_longitude": "string",
+          "gps_latitude": "string",
+          "name": "string",
+          "photo": "http://ZPcuKlKomzAwhLnbZz.rebsK7hrWgR950HuB,xDdv6brk,prXSFvSadFOR3bAP8rSopwOOPuyKHo7lcYBxnDe6JTx510mpl"
+        },
+        {
+          "country": "string",
+          "countryCode": "string",
+          "cityName": "string",
+          "zipcode": "string",
+          "gps_longitude": "string",
+          "gps_latitude": "string",
+          "name": "string",
+          "photo": "https://KvrFPldMbZATHovueehrcKitPxj.ajwujiPBbyDTsg-+Ek96ndNFr"
+        }
+      ]
+    $type: |-
+      {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "cityName": {
+              "type": "string"
+            },
+            "zipcode": {
+              "type": "string"
+            },
+            "gps_longitude": {
+              "type": "string"
+            },
+            "gps_latitude": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "photo": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+order: 1000

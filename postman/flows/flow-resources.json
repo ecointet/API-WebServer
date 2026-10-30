@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "flows": {
+    "1135e22f-cf2f-4d87-a302-b074211c1419": {
+      "path": "/Users/ecointet/Documents/code/API-WebServer/postman/flows/New flow.flow",
+      "dependencies": [
+        {
+          "local": {
+            "collectionId": "4b110611ccfBcd437A4EBaDf",
+            "requestId": "f925DAb30Cd9fdbF2dDdF2F0",
+            "filePath": "/Users/ecointet/Documents/code/API-WebServer/postman/collections/Get Official Document/getdata/{document}/Retrieve a Document.request.yaml"
+          },
+          "cloud": {
+            "collectionId": null,
+            "requestId": null
+          }
+        }
+      ]
+    }
+  }
+}

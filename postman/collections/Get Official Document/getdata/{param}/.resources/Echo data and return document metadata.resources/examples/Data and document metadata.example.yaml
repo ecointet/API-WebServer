@@ -1,0 +1,54 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/getdata/:param"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: param
+      value: string
+      disabled: false
+      description: Function-specific input value.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "data": "string",
+        "content": "string",
+        "uid": "string",
+        "file": "http://JqaokjuWIgqpWPAAildVIzeZ.notxGiGoXWYqQQ4iLnk4tL2GmYHuqfPtjpPFQZwwfNClCDaIKYS7NKXuta3NhIGPZpt"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "uid": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "data",
+          "content",
+          "uid",
+          "file"
+        ]
+      }
+order: 1000
