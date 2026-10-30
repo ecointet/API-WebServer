@@ -1,10 +1,11 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/getdata/:document"
+  url: ://{{baseUrl}}/getdata/:document
   method: GET
   headers:
     - key: Accept
       value: application/json
+      description: ""
     - key: Authorization
       value: Bearer <token>
       description: "Added as a part of security scheme: bearer"
@@ -21,7 +22,7 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: json
+    type: text
     content: |-
       {
         "document": "birth_certificate",

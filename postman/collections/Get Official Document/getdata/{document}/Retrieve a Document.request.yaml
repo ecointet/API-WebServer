@@ -1,17 +1,49 @@
 $kind: http-request
-name: Retrieve a Document
-description: >
-  This endpoint allows you to retrieve an official document from the French
-  government. You can specify the type of document you want to retrieve, such as
-  a birth certificate, marriage certificate, or death certificate.
-url: "{{url}}/getdata/:document"
+description: ""
+url: ://{{url}}/getdata/:document
 method: GET
 headers:
   Accept: application/json
+queryParams:
+  - key: newkey
+    value: ""
+    disabled: true
+    description: ""
 pathVariables:
   document: birth_certificate
 body:
   type: text
   content: ""
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response time is under 2000ms', function () {
+        pm.expect(pm.response.responseTime).to.be.below(2000);
+      });
+
+      const contentType = pm.response.headers.get('Content-Type');
+      if (contentType) {
+        pm.test('Content-Type includes JSON', function () {
+          pm.expect(contentType.toLowerCase()).to.include('json');
+        });
+      }
+
+      const responseText = pm.response.text();
+      if (responseText) {
+        try {
+          const json = pm.response.json();
+
+          pm.test('Response body is an object or array', function () {
+            pm.expect(Array.isArray(json) || (json !== null && typeof json === 'object')).to.be.true;
+          });
+        } catch (error) {
+          // Response is not JSON; skip JSON body sanity check.
+        }
+      }
+    language: text/javascript
 examples: ./.resources/Retrieve a Document.resources/examples
 order: 1000

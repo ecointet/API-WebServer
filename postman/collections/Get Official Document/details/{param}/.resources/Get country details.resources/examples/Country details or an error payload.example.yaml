@@ -1,0 +1,75 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/details/:param"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: param
+      value: string
+      disabled: false
+      description: Function-specific input value.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "country": "string",
+        "country_name": "string",
+        "code": "string",
+        "flag": "string",
+        "flag_img": "http://awbwSxadVjnkRNHgp.bkdMZgh3FSjpnEEqhaZsCcejjisRQb21Dz9XSEl+n",
+        "flag_alt": "string"
+      }
+    $type: |-
+      {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "country": {
+                "type": "string"
+              },
+              "country_name": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              },
+              "flag": {
+                "type": "string"
+              },
+              "flag_img": {
+                "type": "string",
+                "format": "uri"
+              },
+              "flag_alt": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ip": {
+                "type": "string"
+              },
+              "error": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ip",
+              "error"
+            ]
+          }
+        ]
+      }
+order: 1000

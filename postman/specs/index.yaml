@@ -1,61 +1,254 @@
----
 openapi: 3.0.3
 info:
-  title: Web Portal API
+  title: API WebServer
   version: 1.0.0
-  description: All your Services in one API.
-security:
-  - bearerAuth: []
+  description: API specification generated from the PHP routing and response code.
 servers:
   - url: https://api.cointet.com
-    description: Production server (live data)
+    description: Production server
 paths:
-  /getdata/{document}:
+  /locate/{param}:
     get:
-      summary: Retrieve a Document
-      description: |
-        This endpoint allows you to retrieve an official document from the French government. You can specify the type of document you want to retrieve, such as a birth certificate, marriage certificate, or death certificate.
+      summary: Locate an IP address
+      operationId: locateIp
       parameters:
-        - in: path
-          name: document
-          description: The exact name of the document.
-          required: true
-          schema:
-            $ref: '#/components/schemas/document_param'
+        - $ref: '#/components/parameters/Param'
       responses:
-        "200":
-          description: Success
+        '200':
+          description: Location details or an error payload
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getdata'
-        "500":
-          description: Error
+                oneOf:
+                  - $ref: '#/components/schemas/Location'
+                  - $ref: '#/components/schemas/Error'
+  /details/{param}:
+    get:
+      summary: Get country details
+      operationId: getCountryDetails
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Country details or an error payload
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                oneOf:
+                  - $ref: '#/components/schemas/CountryDetails'
+                  - $ref: '#/components/schemas/Error'
+  /chatgpt/{param}:
+    get:
+      summary: Ask for city information
+      operationId: askChatGpt
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Generated answer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatAnswer'
+  /smarthome/{param}:
+    get:
+      summary: Trigger the smart-home integration
+      operationId: smartHome
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Smart-home result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+  /explore/{param}:
+    get:
+      summary: Explore a city
+      operationId: exploreCity
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: City exploration details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExploreResult'
+  /mock/{param}:
+    get:
+      summary: Retrieve cached mock content
+      operationId: getMockContent
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Cached content; shape depends on the stored record
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /getwater/{param}:
+    get:
+      summary: List water centers for a country
+      operationId: getWaterCenters
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Water centers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WaterCenter'
+  /login/{param}:
+    get:
+      summary: Retrieve a demo customer profile
+      operationId: login
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Customer profile or user-not-found status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResult'
+  /getdata/{param}:
+    get:
+      summary: Echo data and return document metadata
+      operationId: getData
+      parameters:
+        - $ref: '#/components/parameters/Param'
+      responses:
+        '200':
+          description: Data and document metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResult'
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
+  parameters:
+    Param:
+      name: param
+      in: path
+      required: true
+      description: Function-specific input value.
+      schema:
+        type: string
   schemas:
-    error:
+    Error:
+      type: object
+      required: [ip, error]
+      properties:
+        ip:
+          type: string
+        error:
+          type: string
+    Location:
       type: object
       properties:
-        message:
+        country:
           type: string
-          example: "Error with your parameters"
-    getdata:
+        countryCode:
+          type: string
+        regionName:
+          type: string
+        city:
+          type: string
+        ip:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
+          format: uri
+    ExploreResult:
       type: object
       properties:
-        document:
+        city:
           type: string
-          example: "birth_certificate"
+        description:
+          type: string
+        photo:
+          type: string
+          format: uri
+    CountryDetails:
+      type: object
+      properties:
+        country:
+          type: string
+        country_name:
+          type: string
+        code:
+          type: string
+        flag:
+          type: string
+        flag_img:
+          type: string
+          format: uri
+        flag_alt:
+          type: string
+    ChatAnswer:
+      type: object
+      properties:
+        id:
+          type: string
+        model:
+          type: string
+        answer:
+          type: string
+        question:
+          type: string
+    WaterCenter:
+      type: object
+      properties:
+        country:
+          type: string
+        countryCode:
+          type: string
+        cityName:
+          type: string
+        zipcode:
+          type: string
+        gps_longitude:
+          type: string
+        gps_latitude:
+          type: string
+        name:
+          type: string
+        photo:
+          type: string
+          format: uri
+    LoginResult:
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        total:
+          type: string
+        internal_note:
+          type: string
+        status:
+          type: string
+        last_update:
+          type: string
+    DataResult:
+      type: object
+      required: [data, content, uid, file]
+      properties:
+        data:
+          type: string
         content:
           type: string
-          example: "Official document content goes here."
-    document_param:
-      type: string
-      example: "birth_certificate"
+        uid:
+          type: string
+        file:
+          type: string
+          format: uri

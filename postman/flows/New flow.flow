@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "name": "New flow",
+  "description": "",
+  "flow": {
+    "description": "",
+    "nodes": {
+      "tbGRKXx_": {
+        "type": "ev/endpoint@3",
+        "pos": {
+          "x": 0,
+          "y": 0
+        },
+        "config": {
+          "inputs": [],
+          "data": "",
+          "language": "json",
+          "allowAnyType": false
+        },
+        "ui": {
+          "data": {
+            "triggerType": "ev/endpoint@3"
+          },
+          "namedInputsExpanded": true
+        }
+      },
+      "7MfP97lO": {
+        "type": "task/http-request@1",
+        "pos": {
+          "x": 320,
+          "y": -192
+        },
+        "config": {
+          "element": {
+            "id": "f925DAb30Cd9fdbF2dDdF2F0",
+            "collection": "4b110611ccfBcd437A4EBaDf",
+            "inExtensibleCollection": true,
+            "name": "Retrieve a Document",
+            "method": "GET"
+          },
+          "environment": null,
+          "parseBody": "auto",
+          "requestVariables": [
+            {
+              "id": "6-DUmYPM",
+              "type": null,
+              "kind": null,
+              "value": null,
+              "key": "bearerToken"
+            },
+            {
+              "id": "a9tu2Jdh",
+              "type": null,
+              "kind": null,
+              "value": null,
+              "key": "url"
+            }
+          ],
+          "scriptsModifyEnvVars": true,
+          "trackGlobalEnvironment": true,
+          "requestVariables__expanded": true
+        },
+        "ui": {
+          "data": {},
+          "namedInputsExpanded": true
+        }
+      },
+      "jGzB7RPp": {
+        "type": "task/http-request@1",
+        "pos": {
+          "x": 784,
+          "y": 136
+        },
+        "config": {
+          "element": {
+            "id": null,
+            "collection": null
+          },
+          "environment": null,
+          "parseBody": "auto",
+          "requestVariables": [],
+          "scriptsModifyEnvVars": true,
+          "trackGlobalEnvironment": true
+        },
+        "ui": {
+          "data": {},
+          "namedInputsExpanded": true
+        }
+      },
+      "QdKhJEPO": {
+        "type": "ai/agent@2",
+        "pos": {
+          "x": 848,
+          "y": -368
+        },
+        "config": {
+          "model": "openai:gpt-5-2025-08-07",
+          "systemPrompt": "",
+          "enforceOutputSchema": false,
+          "outputSchema": "",
+          "context": [],
+          "mcpServers": []
+        },
+        "ui": {
+          "data": {
+            "collapsed": false
+          },
+          "namedInputsExpanded": true
+        }
+      }
+    },
+    "connections": {
+      "fZ842f-k": {
+        "source": "tbGRKXx_",
+        "target": "7MfP97lO",
+        "sourcePort": "data",
+        "targetPort": "AI"
+      },
+      "yE2rkbwx": {
+        "source": "7MfP97lO",
+        "target": "jGzB7RPp",
+        "sourcePort": "success",
+        "targetPort": "AI"
+      }
+    },
+    "annotations": {},
+    "groups": {},
+    "webhook": {
+      "payloadContent": "body-only",
+      "responseType": "default"
+    },
+    "forms": {},
+    "modules": {},
+    "io": {},
+    "ports": {},
+    "meta": {},
+    "scenes": {},
+    "scenarios": {},
+    "config": {
+      "definitions": {},
+      "constants": {}
+    }
+  },
+  "lockbox": {},
+  "info": {
+    "_postman_id": "1135e22f-cf2f-4d87-a302-b074211c1419"
+  },
+  "_postman_exported_at": "2026-04-02T15:09:31.541Z",
+  "_postman_exported_using": "Postman/Local Mode"
+}

@@ -1,0 +1,29 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/locate/:param"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: param
+    value: string
+    disabled: false
+    description: Function-specific input value.
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+settings: {}
+examples: ./.resources/Locate an IP address.resources/examples
+order: 1000

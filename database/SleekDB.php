@@ -370,7 +370,7 @@ class SleekDB
    * @return SleekDB
    * @throws InvalidArgumentException
    */
-  public function useCache(int $lifetime = null): SleekDB
+  public function useCache(?int $lifetime = null): SleekDB
   {
     $this->setQueryBuilder($this->getQueryBuilder()->useCache($lifetime));
     return $this;
@@ -510,7 +510,7 @@ class SleekDB
    * @throws IOException
    * @throws InvalidArgumentException
    */
-  public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
+  public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->getStore()->findBy($criteria, $orderBy, $limit, $offset);
   }

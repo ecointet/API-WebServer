@@ -1,0 +1,29 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/login/:param"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: param
+    value: string
+    disabled: false
+    description: Function-specific input value.
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+settings: {}
+examples: ./.resources/Retrieve a demo customer profile.resources/examples
+order: 1000
