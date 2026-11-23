@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights API — Documentation</title>
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css">
+    <style>
+        body { margin: 0; background: #0f172a; }
+
+        /* Top bar */
+        .topbar-wrapper { display: none !important; }
+        .swagger-ui .topbar { display: none; }
+
+        /* Custom header */
+        #custom-header {
+            background: #0d1626;
+            border-bottom: 2px solid #f5b800;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Orbitron', 'Share Tech Mono', monospace;
+        }
+
+        #custom-header a {
+            font-size: 0.8rem;
+            color: #f5b800;
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: 1px solid #7a5f00;
+            padding: 6px 16px;
+            transition: all 0.15s;
+        }
+        #custom-header a:hover {
+            background: #f5b800;
+            color: #060b18;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 16px; }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            color: #f5b800;
+            text-shadow: 0 0 20px rgba(245,184,0,0.4);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .logo-sub {
+            font-size: 0.65rem;
+            color: #5a4e2e;
+            letter-spacing: 3px;
+            margin-top: 3px;
+        }
+
+        /* Swagger UI overrides */
+        .swagger-ui { background: #0f172a; }
+        .swagger-ui .wrapper { background: #0f172a; }
+        .swagger-ui .info    { margin: 32px 0 24px; }
+        .swagger-ui .info .title { color: #f5b800; }
+        .swagger-ui .info p,
+        .swagger-ui .info li,
+        .swagger-ui .info table { color: #d9c896; }
+        .swagger-ui .scheme-container { background: #0d1626; box-shadow: none; border-bottom: 1px solid #111f3a; }
+        .swagger-ui section.models { background: #0d1626; }
+        .swagger-ui section.models h4 span { color: #f5b800; }
+        .swagger-ui .model-title { color: #f5b800; }
+        .swagger-ui .model      { color: #d9c896; }
+        .swagger-ui .opblock-tag { color: #f5b800; border-bottom-color: #111f3a; }
+        .swagger-ui .opblock-tag:hover { background: rgba(245,184,0,0.04); }
+        .swagger-ui .opblock.opblock-get .opblock-summary { border-color: #38bdf8; }
+        .swagger-ui .opblock.opblock-get { background: rgba(56,189,248,0.05); border-color: #38bdf8; }
+        .swagger-ui .opblock.opblock-get .opblock-summary-method { background: #38bdf8; color: #060b18; }
+        .swagger-ui .opblock-summary-path { color: #d9c896; }
+        .swagger-ui .opblock-summary-description { color: #5a4e2e; }
+        .swagger-ui .tab li { color: #d9c896; }
+        .swagger-ui .tab li.active { color: #f5b800; }
+        .swagger-ui .btn.execute { background: #f5b800; border-color: #f5b800; color: #060b18; font-weight: 700; }
+        .swagger-ui .btn.execute:hover { background: #d4a000; }
+        .swagger-ui input[type=text],
+        .swagger-ui textarea { background: #0d1626; color: #d9c896; border-color: #1a2744; }
+        .swagger-ui select { background: #0d1626; color: #d9c896; border-color: #1a2744; }
+        .swagger-ui .response-col_status { color: #4ade80; }
+        .swagger-ui .response-col_description { color: #d9c896; }
+        .swagger-ui .prop-type { color: #38bdf8; }
+        .swagger-ui .prop-format { color: #fb923c; }
+        .swagger-ui table thead tr td,
+        .swagger-ui table thead tr th { color: #f5b800; border-color: #111f3a; }
+        .swagger-ui table tbody tr td { color: #d9c896; border-color: #111f3a; }
+        .swagger-ui .parameter__name { color: #f5b800; }
+        .swagger-ui .parameter__type { color: #38bdf8; }
+        .swagger-ui .markdown p { color: #d9c896; }
+        .swagger-ui .servers > label select { background: #0d1626; color: #d9c896; }
+        .swagger-ui .servers > label { color: #d9c896; }
+        .swagger-ui .servers-title { color: #f5b800; }
+        .swagger-ui .expand-methods svg,
+        .swagger-ui .expand-operation svg { fill: #5a4e2e; }
+        .swagger-ui .arrow { fill: #f5b800; }
+        .swagger-ui .model-box { background: #0d1626; }
+        .swagger-ui .model-box-control:focus { outline: none; }
+        .swagger-ui .required { color: #fb923c !important; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="custom-header">
+    <div class="header-left">
+        <div>
+            <div class="logo">✈ FIDS API</div>
+            <div class="logo-sub">OpenAPI 3.0 — Flights Specification</div>
+        </div>
+    </div>
+    <a href="index.html">← Flight Board</a>
+</div>
+
+<div id="swagger-ui"></div>
+
+<script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+<script>
+    SwaggerUIBundle({
+        url: '/api/spec-flights.yaml',
+        dom_id: '#swagger-ui',
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIBundle.SwaggerUIStandalonePreset],
+        layout: 'BaseLayout',
+        deepLinking: true,
+        defaultModelsExpandDepth: 1,
+        defaultModelExpandDepth: 2,
+        docExpansion: 'list',
+        tryItOutEnabled: true,
+        requestInterceptor: (req) => { req.headers['Accept'] = 'application/json'; return req; },
+    });
+</script>
+</body>
+</html>
