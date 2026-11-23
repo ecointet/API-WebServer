@@ -1,0 +1,235 @@
+---
+openapi: 3.0.3
+info:
+  title: Flights API
+  version: 1.0.0
+  description: Real-time flight information — list active flights and retrieve details for a specific flight.
+security:
+  - BasicAuth: []
+servers:
+  - url: https://api.cointet.com
+    description: Production server
+paths:
+  /flights:
+    get:
+      summary: List active flights
+      description: |
+        Returns a list of all currently active flights with their status.
+        Results can be filtered by an IATA airport code (origin or destination).
+      parameters:
+        - in: query
+          name: airport
+          required: false
+          description: IATA airport code to filter flights by origin or destination (e.g. `CDG`, `JFK`).
+          schema:
+            type: string
+            pattern: '^[A-Z]{3}$'
+            example: CDG
+      responses:
+        "200":
+          description: List of active flights
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/flights_list'
+        "400":
+          description: Invalid airport code format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /flights/{flightCode}:
+    get:
+      summary: Get flight details
+      description: |
+        Returns detailed information for a specific flight identified by its IATA flight code
+        (e.g. `AF001`, `BA112`).
+      parameters:
+        - in: path
+          name: flightCode
+          required: true
+          description: IATA flight code of the flight to retrieve.
+          schema:
+            $ref: '#/components/schemas/flightCode_param'
+      responses:
+        "200":
+          description: Flight details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/flight_detail'
+        "404":
+          description: Flight not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "An error occurred"
+
+    flight_summary:
+      type: object
+      description: Condensed flight info returned in list responses.
+      properties:
+        flightCode:
+          type: string
+          example: "AF001"
+        airline:
+          type: string
+          example: "Air France"
+        origin:
+          type: string
+          description: IATA code of the departure airport.
+          example: "CDG"
+        destination:
+          type: string
+          description: IATA code of the arrival airport.
+          example: "JFK"
+        scheduledDeparture:
+          type: string
+          format: date-time
+          example: "2026-11-23T08:30:00Z"
+        scheduledArrival:
+          type: string
+          format: date-time
+          example: "2026-11-23T11:45:00Z"
+        status:
+          $ref: '#/components/schemas/flight_status'
+
+    flight_detail:
+      type: object
+      description: Full flight information returned for a single flight.
+      properties:
+        flightCode:
+          type: string
+          example: "AF001"
+        airline:
+          type: string
+          example: "Air France"
+        aircraft:
+          type: string
+          description: Aircraft type/model.
+          example: "Boeing 777-300ER"
+        origin:
+          type: object
+          properties:
+            iata:
+              type: string
+              example: "CDG"
+            name:
+              type: string
+              example: "Charles de Gaulle Airport"
+            city:
+              type: string
+              example: "Paris"
+            country:
+              type: string
+              example: "France"
+        destination:
+          type: object
+          properties:
+            iata:
+              type: string
+              example: "JFK"
+            name:
+              type: string
+              example: "John F. Kennedy International Airport"
+            city:
+              type: string
+              example: "New York"
+            country:
+              type: string
+              example: "United States"
+        scheduledDeparture:
+          type: string
+          format: date-time
+          example: "2026-11-23T08:30:00Z"
+        actualDeparture:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2026-11-23T08:47:00Z"
+        scheduledArrival:
+          type: string
+          format: date-time
+          example: "2026-11-23T11:45:00Z"
+        estimatedArrival:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2026-11-23T12:02:00Z"
+        status:
+          $ref: '#/components/schemas/flight_status'
+        delayMinutes:
+          type: integer
+          description: Current delay in minutes (0 if on time).
+          example: 17
+        gate:
+          type: string
+          nullable: true
+          example: "2E-K41"
+        terminal:
+          type: string
+          nullable: true
+          example: "2E"
+
+    flights_list:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of flights returned.
+          example: 3
+        airport_filter:
+          type: string
+          nullable: true
+          description: The airport code used as filter, if any.
+          example: "CDG"
+        flights:
+          type: array
+          items:
+            $ref: '#/components/schemas/flight_summary'
+
+    flight_status:
+      type: string
+      description: Current operational status of the flight.
+      enum:
+        - scheduled
+        - boarding
+        - departed
+        - in_flight
+        - landed
+        - arrived
+        - delayed
+        - cancelled
+      example: "in_flight"
+
+    flightCode_param:
+      type: string
+      pattern: '^[A-Z]{2}\d{1,4}$'
+      example: "AF001"

@@ -2,6 +2,7 @@
 require "database/Store.php";
 require "src/tools.php";
 require "src/functions.php";
+require "src/flights.php";
 
 //FUNCTIONS
 //INIT DATABASE
@@ -11,29 +12,37 @@ $data = new \SleekDB\Store("cache", $databaseDirectory);
 //GET DATA
 $method = $_SERVER['REQUEST_METHOD'];
 
-if (!isset($_GET['param']) || !isset($_GET['func']))
+if (!isset($_GET['func']))
     $retour = generate_error();
 else
 {
     if ($method == 'GET') {
+        $param = isset($_GET['param']) ? $_GET['param'] : null;
         if (strtolower($_GET['func']) == "locate")
-            $retour = cityFromIP($_GET['param']);
+            $retour = cityFromIP($param);
         if (strtolower($_GET['func']) == "details")
-            $retour = DetailsFromCountry($_GET['param']);
+            $retour = DetailsFromCountry($param);
         if (strtolower($_GET['func']) == "chatgpt")
-            $retour = ChatGPT($_GET['param']);
+            $retour = ChatGPT($param);
         if (strtolower($_GET['func']) == "smarthome")
             $retour = SmartHome();
         if (strtolower($_GET['func']) == "explore")
-            $retour = Explore($_GET['param']);
+            $retour = Explore($param);
         if (strtolower($_GET['func']) == "mock")
-            $retour = MockCache($_GET['param'], $data);
+            $retour = MockCache($param, $data);
         if (strtolower($_GET['func']) == "getwater")
-            $retour = GetWaterCenters($_GET['param'], $data);
+            $retour = GetWaterCenters($param, $data);
         if (strtolower($_GET['func']) == "login")
-            $retour = GetLogin($_GET['param'], $data);
+            $retour = GetLogin($param, $data);
         if (strtolower($_GET['func']) == "getdata")
-            $retour = GetData($_GET['param'], $data);
+            $retour = GetData($param, $data);
+        if (strtolower($_GET['func']) == "flights") {
+            $airport = isset($_GET['airport']) ? strtoupper($_GET['airport']) : null;
+            if ($param !== null)
+                $retour = GetFlightDetails(strtoupper($param));
+            else
+                $retour = GetFlights($airport);
+        }
     }
     if ($method == 'POST') {
         echo "THIS IS A POST REQUEST";
