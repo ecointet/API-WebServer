@@ -1,0 +1,12 @@
+schemaVersion: sdk-config/v1
+sdkName: flights
+source:
+  specs:
+    - id: api
+      type: openapi
+      path: ./openapi.json
+targets:
+  - language: mcp
+    output:
+      delivery: hosted
+      slug: flights
