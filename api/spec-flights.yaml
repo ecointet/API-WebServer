@@ -4,8 +4,6 @@ info:
   title: Flights API
   version: 1.0.0
   description: Real-time flight information — list active flights and retrieve details for a specific flight.
-security:
-  - BasicAuth: []
 servers:
   - url: https://api.cointet.com
     description: Production server
