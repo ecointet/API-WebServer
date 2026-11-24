@@ -1,0 +1,127 @@
+---
+title: Flight Statuses
+subtitle: Every flight in the FIDS API carries a status value. Here is what each one means.
+slug: flight-statuses
+---
+
+The `status` field appears on both the list (`GET /flights`) and detail (`GET /flights/{flightCode}`) responses.
+It is an enum of eight values that map to the standard IATA operational lifecycle of a flight.
+
+---
+
+<div className="status-grid">
+
+  <div className="status-card status-scheduled">
+    <div className="status-card-dot" style={{background:"#94a3b8"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">scheduled</div>
+      <div className="status-card-desc">Flight is confirmed and on the timetable. Departure has not started yet. No gate assignment may be available.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-boarding">
+    <div className="status-card-dot" style={{background:"#22d3ee"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">boarding</div>
+      <div className="status-card-desc">Gate is open, passengers are boarding. The flight is on the ground and ready for push-back.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-departed">
+    <div className="status-card-dot" style={{background:"#60a5fa"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">departed</div>
+      <div className="status-card-desc">The aircraft has pushed back and left the gate. It is taxiing or awaiting take-off clearance.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-in-flight">
+    <div className="status-card-dot" style={{background:"#38bdf8"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">in_flight</div>
+      <div className="status-card-desc">Airborne. The aircraft is currently en route to its destination. Live position data may be available.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-landed">
+    <div className="status-card-dot" style={{background:"#4ade80"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">landed</div>
+      <div className="status-card-desc">The aircraft has touched down at the destination airport and is taxiing to the terminal.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-arrived">
+    <div className="status-card-dot" style={{background:"#86efac"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">arrived</div>
+      <div className="status-card-desc">The aircraft has parked at the gate. Doors are open and passengers are disembarking.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-delayed">
+    <div className="status-card-dot" style={{background:"#fb923c"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">delayed</div>
+      <div className="status-card-desc">The flight is operating behind schedule. Check <code>delayMinutes</code> and <code>estimatedArrival</code> for the current estimated impact.</div>
+    </div>
+  </div>
+
+  <div className="status-card status-cancelled">
+    <div className="status-card-dot" style={{background:"#f87171"}}></div>
+    <div className="status-card-content">
+      <div className="status-card-name">cancelled</div>
+      <div className="status-card-desc">The flight has been cancelled. <code>actualDeparture</code> and <code>estimatedArrival</code> will be <code>null</code>.</div>
+    </div>
+  </div>
+
+</div>
+
+---
+
+## Status lifecycle
+
+A flight typically progresses through the following sequence:
+
+```
+scheduled → boarding → departed → in_flight → landed → arrived
+```
+
+At any point before `departed`, a flight may transition to:
+
+```
+* → delayed
+* → cancelled
+```
+
+<Note>
+A `delayed` flight may still board and depart — it retains the `delayed` status to reflect the original schedule deviation. The `delayMinutes` field is the authoritative value for delay quantification.
+</Note>
+
+---
+
+## In your code
+
+Filter the response to only show flights currently in the air:
+
+```javascript title="JavaScript — filter in-flight"
+const { flights } = await (await fetch(
+  "https://api.cointet.com/flights",
+  { headers: { Authorization: "Basic " + btoa("user:pass") } }
+)).json();
+
+const airborne = flights.filter(f => f.status === "in_flight");
+```
+
+```python title="Python — group by status"
+import requests
+from collections import defaultdict
+
+r = requests.get(
+    "https://api.cointet.com/flights",
+    auth=("user", "pass"),
+)
+by_status = defaultdict(list)
+for flight in r.json()["flights"]:
+    by_status[flight["status"]].append(flight)
+```

@@ -1,69 +1,96 @@
 ---
-title: Welcome to Flight Status!
-subtitle: Everything you need to build the best developer experience.
+title: FIDS API
+subtitle: Real-time flight status data — query active flights, track delays, and retrieve full departure & arrival details.
 slug: welcome
 hide-page-actions: true
-hide-nav-links: true
+hide-nav-links: false
 hide-feedback: true
 layout: overview
 ---
 
-<div className="welcome-hero-tint">
-  <img src="https://play-lh.googleusercontent.com/wMiPq4ExYwhogG7x3jmP3q1vEWIzpF37KEIaCIQGINvJ8JnZ48aW-zd0dp-KQQeJLTAG2naa_HWnBTpQWzTP--o" className="block dark:hidden" style={{pointerEvents:'none',cursor:'default',width:'30%',transform:'none',transition:'none',animation:'none'}} />
-  <img src="https://play-lh.googleusercontent.com/wMiPq4ExYwhogG7x3jmP3q1vEWIzpF37KEIaCIQGINvJ8JnZ48aW-zd0dp-KQQeJLTAG2naa_HWnBTpQWzTP--o" className="hidden dark:block" style={{pointerEvents:'none',cursor:'default',width:'30%',transform:'none',transition:'none',animation:'none'}} />
+<div className="fids-board">
+  <div className="fids-board-header">
+    <span>✈ API ENDPOINT BOARD</span>
+    <span className="fids-live">LIVE</span>
+  </div>
+  <div className="fids-col-headers">
+    <span>Method</span>
+    <span>Path</span>
+    <span>Description</span>
+    <span>Auth</span>
+    <span>Status</span>
+  </div>
+  <div className="fids-row">
+    <span className="fids-method">GET</span>
+    <span className="fids-path">/flights</span>
+    <span className="fids-desc">List all active flights — filter by airport code</span>
+    <span className="fids-auth">Basic Auth</span>
+    <span><span className="fids-status-badge active">ACTIVE</span></span>
+  </div>
+  <div className="fids-row">
+    <span className="fids-method">GET</span>
+    <span className="fids-path">/flights/{"{flightCode}"}</span>
+    <span className="fids-desc">Full details for a single flight</span>
+    <span className="fids-auth">Basic Auth</span>
+    <span><span className="fids-status-badge active">ACTIVE</span></span>
+  </div>
 </div>
 
-## Products
+## Endpoints
 
-<CardGroup cols={3}>
-  <Card title="Payments" icon="duotone credit-card">
-    Accept one-time and recurring payments with a simple, unified API
+<CardGroup cols={2}>
+  <Card title="GET /flights" icon="fa-duotone fa-plane" href="/flights-api/get-flights">
+    Returns a list of all currently active flights. Filter results by IATA airport code using the `?airport=` query parameter.
   </Card>
-  <Card title="Subscriptions" icon="duotone arrows-repeat">
-    Create and manage recurring billing plans with built-in proration and trials
-  </Card>
-  <Card title="Invoicing" icon="duotone file-invoice-dollar">
-    Generate, send, and track invoices automatically
+  <Card title="GET /flights/{flightCode}" icon="fa-duotone fa-magnifying-glass" href="/flights-api/get-flight-by-flight-code">
+    Returns full departure, arrival, aircraft, and status details for a specific flight identified by its IATA code (e.g. `AF011`).
   </Card>
 </CardGroup>
 
-## Get started
+## Quick Start
 
 <Steps>
-<Step title="Install the SDK">
-
-One SDK gives you access to Payments, Subscriptions, and Invoicing. 
-<CodeBlocks>
-  ```bash title="npm"
-  npm install @acme/sdk
-  ```
-
-  ```bash title="pip"
-  pip install acme-sdk
-  ```
-
-  ```bash title="go"
-  go get github.com/acme/acme-go
-  ```
-</CodeBlocks>
-
-</Step>
 <Step title="Authenticate">
 
-Create an API key from the Acme Dashboard and add it to your environment:
+All requests require HTTP Basic Authentication. Pass your credentials with each request:
 
-```bash
-export ACME_API_KEY="sk_live_..."
+```bash title="cURL"
+curl -u username:password https://api.cointet.com/flights
 ```
 
 </Step>
-<Step title="Explore the docs">
+<Step title="List active flights">
 
-You're ready to go. Dive deeper into the platform:
+Fetch all currently tracked flights:
 
-- [API reference](/api-reference) — browse all available endpoints
-- [Write content](/writing-content) — author pages with MDX and components
-- [Edit your docs](/editing-your-docs) — customize content, styling, and structure
+```bash title="All flights"
+curl -u username:password https://api.cointet.com/flights
+```
+
+Filter by departure or arrival airport:
+
+```bash title="Filter by CDG"
+curl -u username:password "https://api.cointet.com/flights?airport=CDG"
+```
+
+</Step>
+<Step title="Retrieve flight details">
+
+Use the IATA flight code to get full details — times, gate, terminal, delay:
+
+```bash title="Flight AF011"
+curl -u username:password https://api.cointet.com/flights/AF011
+```
 
 </Step>
 </Steps>
+
+## Base URL
+
+```
+https://api.cointet.com
+```
+
+<Note>
+All endpoints return `application/json`. Date-time values are ISO 8601 UTC strings (e.g. `2026-11-23T08:30:00Z`).
+</Note>

@@ -1,81 +1,156 @@
 ---
-title: API reference
-subtitle: Interactive documentation generated from your API specification
-slug: api-reference
+title: API Overview
+subtitle: The FIDS API exposes real-time flight status data over a simple REST interface.
+slug: api-reference-overview
 ---
 
-Fern automatically generates interactive API reference documentation from your API specification. This starter template includes a sample Plant Store API to demonstrate the feature.
+## Base URL
 
-## Supported specifications
-
-Fern supports multiple API specification formats:
-
-| Format | Description | Documentation |
-|--------|-------------|---------------|
-| **OpenAPI** | The most widely used REST API specification format (versions 2.0, 3.0, and 3.1) | [OpenAPI docs](https://buildwithfern.com/learn/api-definitions/openapi/overview) |
-| **AsyncAPI** | For event-driven and message-based APIs | [AsyncAPI docs](https://buildwithfern.com/learn/api-definitions/asyncapi) |
-| **gRPC** | Protocol buffer definitions for gRPC services | [gRPC docs](https://buildwithfern.com/learn/api-definitions/protobuf) |
-
-## How it works
-
-Place your API specification file in the `fern/` directory and reference it in your `docs.yml` navigation:
-
-```yaml title="docs.yml"
-navigation:
-  - section: Documentation
-    contents:
-      - page: Overview
-        path: docs/pages/overview.mdx
-  - api: API Reference
+```
+https://api.cointet.com
 ```
 
-Fern parses your specification and generates:
+All endpoints are served over HTTPS. HTTP requests are not supported.
 
-- Endpoint documentation with request/response schemas
-- Interactive API Explorer for testing endpoints
-- Code snippets in multiple languages
-- Type definitions and examples
+---
 
-## API Explorer
+## Authentication
 
-The API Explorer lets users test API endpoints directly in the documentation. Users can fill in parameters, send requests, and see responses without leaving the page.
+The API uses **HTTP Basic Authentication**. Pass your credentials on every request.
 
-<Note>
-For advanced API Explorer features like auto-populating API keys, see the [API Explorer documentation](https://buildwithfern.com/learn/docs/api-references/api-explorer/overview).
-</Note>
-
-## Customizing the API reference
-
-Control how your API reference appears using the `api` configuration in `docs.yml`:
-
-```yaml title="docs.yml"
-navigation:
-  - api: API Reference
-    api-name: plantstore
-    paginated: true
+```bash
+curl -u YOUR_USER:YOUR_PASS https://api.cointet.com/flights
 ```
 
-You can also add custom content to API reference pages, organize endpoints into groups, customize section names, and control which endpoints are visible.
+<Warning>
+Never expose credentials in client-side code. Route requests through your backend.
+</Warning>
 
-<Note>
-For detailed customization options, see the [API reference documentation](https://buildwithfern.com/learn/docs/api-references/generate-api-ref).
-</Note>
+---
 
-## SDK code snippets
+## Endpoints
 
-If you generate SDKs with Fern, code snippets automatically appear in your API reference showing how to call each endpoint using your SDK:
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/flights` | List all active flights (optional `?airport=` filter) |
+| `GET` | `/flights/{flightCode}` | Full details for a specific flight |
 
-```yaml title="generators.yml"
-groups:
-  python-sdk:
-    generators:
-      - name: fernapi/fern-python-sdk
-        version: 4.3.1
-        output:
-          location: pypi
-          package-name: plantstore
+---
+
+## Request parameters
+
+### `GET /flights`
+
+| Parameter | In | Type | Required | Description |
+|-----------|----|------|----------|-------------|
+| `airport` | query | `string` | No | 3-letter IATA code — filters by origin **or** destination. Pattern: `^[A-Z]{3}$` |
+
+### `GET /flights/{flightCode}`
+
+| Parameter | In | Type | Required | Description |
+|-----------|----|------|----------|-------------|
+| `flightCode` | path | `string` | Yes | IATA flight identifier. Pattern: `^[A-Z]{2}\d{1,4}$` (e.g. `AF011`, `DL402`) |
+
+---
+
+## Response format
+
+All successful responses return JSON with `Content-Type: application/json`.
+
+### Flight summary (list response)
+
+```json
+{
+  "total": 2,
+  "airport_filter": "CDG",
+  "flights": [
+    {
+      "flightCode":         "AF011",
+      "airline":            "Air France",
+      "origin":             "CDG",
+      "destination":        "JFK",
+      "scheduledDeparture": "2026-11-23T08:30:00Z",
+      "scheduledArrival":   "2026-11-23T11:50:00Z",
+      "status":             "in_flight"
+    }
+  ]
+}
 ```
 
-<Note>
-For more information on SDK generation, see the [SDK documentation](https://buildwithfern.com/learn/sdks/overview/introduction).
-</Note>
+### Flight detail (single flight response)
+
+```json
+{
+  "flightCode":          "AF011",
+  "airline":             "Air France",
+  "aircraft":            "Airbus A380-800",
+  "origin": {
+    "iata":    "CDG",
+    "name":    "Charles de Gaulle Airport",
+    "city":    "Paris",
+    "country": "France"
+  },
+  "destination": {
+    "iata":    "JFK",
+    "name":    "John F. Kennedy International Airport",
+    "city":    "New York",
+    "country": "United States"
+  },
+  "scheduledDeparture":  "2026-11-23T08:30:00Z",
+  "actualDeparture":     "2026-11-23T08:30:00Z",
+  "scheduledArrival":    "2026-11-23T11:50:00Z",
+  "estimatedArrival":    "2026-11-23T11:50:00Z",
+  "status":              "in_flight",
+  "delayMinutes":        0,
+  "gate":                "K32",
+  "terminal":            "2E"
+}
+```
+
+---
+
+## HTTP status codes
+
+| Code | Description |
+|------|-------------|
+| `200 OK` | Request successful |
+| `401 Unauthorized` | Missing or invalid credentials |
+| `404 Not Found` | Flight code does not exist |
+| `400 Bad Request` | Invalid parameter format (e.g. airport code not 3 uppercase letters) |
+| `500 Internal Server Error` | Unexpected server error |
+
+---
+
+## Timestamps
+
+All date-time fields are **ISO 8601 strings in UTC**:
+
+```
+2026-11-23T08:30:00Z
+```
+
+Fields that may be `null`:
+
+| Field | When null |
+|-------|-----------|
+| `actualDeparture` | Flight has not yet departed |
+| `estimatedArrival` | No estimate available yet |
+| `gate` | Gate not yet assigned |
+
+---
+
+## Flight status values
+
+See [Flight Statuses](/flight-statuses) for the full reference with descriptions and lifecycle diagram.
+
+---
+
+## OpenAPI specification
+
+The machine-readable spec is available at:
+
+```
+https://api.cointet.com/api/spec-flights.yaml
+```
+
+It follows the **OpenAPI 3.0.3** standard and can be imported directly into Postman, Insomnia, or any compatible API client.

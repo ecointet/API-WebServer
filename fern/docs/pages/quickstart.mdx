@@ -1,0 +1,156 @@
+---
+title: Quick Start
+subtitle: Make your first flight status request in under two minutes.
+slug: quickstart
+---
+
+## Prerequisites
+
+You need an API key (HTTP Basic Auth credentials). Contact the API administrator to obtain access.
+
+---
+
+## 1 — Your first request
+
+Fetch all currently active flights with a single `curl` command:
+
+```bash title="Terminal"
+curl -u YOUR_USER:YOUR_PASS \
+  https://api.cointet.com/flights
+```
+
+**Response:**
+
+```json title="200 OK"
+{
+  "total": 10,
+  "airport_filter": null,
+  "flights": [
+    {
+      "flightCode": "AF011",
+      "airline": "Air France",
+      "origin": "CDG",
+      "destination": "JFK",
+      "scheduledDeparture": "2026-11-23T08:30:00Z",
+      "scheduledArrival": "2026-11-23T11:50:00Z",
+      "status": "in_flight"
+    }
+  ]
+}
+```
+
+---
+
+## 2 — Filter by airport
+
+Pass the `airport` query parameter with a 3-letter IATA code to narrow results to flights departing from **or** arriving at that airport:
+
+<CodeBlocks>
+```bash title="Departures & arrivals at CDG"
+curl -u YOUR_USER:YOUR_PASS \
+  "https://api.cointet.com/flights?airport=CDG"
+```
+
+```python title="Python"
+import requests
+
+r = requests.get(
+    "https://api.cointet.com/flights",
+    params={"airport": "CDG"},
+    auth=("YOUR_USER", "YOUR_PASS"),
+)
+print(r.json())
+```
+
+```javascript title="JavaScript"
+const res = await fetch(
+  "https://api.cointet.com/flights?airport=CDG",
+  {
+    headers: {
+      Authorization: "Basic " + btoa("YOUR_USER:YOUR_PASS"),
+    },
+  }
+);
+const data = await res.json();
+console.log(data);
+```
+</CodeBlocks>
+
+---
+
+## 3 — Get full details for a flight
+
+Use the flight's IATA code as a path parameter to retrieve its complete record — including gate, terminal, delay, and actual timestamps:
+
+<CodeBlocks>
+```bash title="cURL"
+curl -u YOUR_USER:YOUR_PASS \
+  https://api.cointet.com/flights/AF011
+```
+
+```python title="Python"
+r = requests.get(
+    "https://api.cointet.com/flights/AF011",
+    auth=("YOUR_USER", "YOUR_PASS"),
+)
+print(r.json())
+```
+
+```javascript title="JavaScript"
+const res = await fetch(
+  "https://api.cointet.com/flights/AF011",
+  {
+    headers: {
+      Authorization: "Basic " + btoa("YOUR_USER:YOUR_PASS"),
+    },
+  }
+);
+const data = await res.json();
+console.log(data.status); // "in_flight"
+```
+</CodeBlocks>
+
+**Response:**
+
+```json title="200 OK"
+{
+  "flightCode": "AF011",
+  "airline": "Air France",
+  "aircraft": "Airbus A380-800",
+  "origin": {
+    "iata": "CDG",
+    "name": "Charles de Gaulle Airport",
+    "city": "Paris",
+    "country": "France"
+  },
+  "destination": {
+    "iata": "JFK",
+    "name": "John F. Kennedy International Airport",
+    "city": "New York",
+    "country": "United States"
+  },
+  "scheduledDeparture": "2026-11-23T08:30:00Z",
+  "actualDeparture":    "2026-11-23T08:30:00Z",
+  "scheduledArrival":   "2026-11-23T11:50:00Z",
+  "estimatedArrival":   "2026-11-23T11:50:00Z",
+  "status":             "in_flight",
+  "delayMinutes":       0,
+  "gate":               "K32",
+  "terminal":           "2E"
+}
+```
+
+---
+
+## Error handling
+
+| HTTP Status | Meaning |
+|-------------|---------|
+| `200` | Success — data returned |
+| `401` | Missing or invalid credentials |
+| `404` | Flight code not found |
+| `500` | Server error |
+
+<Warning>
+Flight codes are case-sensitive and follow the IATA format: 2-letter airline prefix + 1–4 digit number (e.g. `AF011`, `DL402`). An unknown code returns a `404`.
+</Warning>

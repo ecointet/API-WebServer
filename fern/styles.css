@@ -1,6 +1,253 @@
-/* Custom styles for Fern Docs Starter */
+/* ─── Aviation Theme — FIDS API Docs ─────────────────────────────────────── */
 
-/* Accent tint on welcome hero images */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ─── Root overrides ──────────────────────────────────────────────────────── */
+:root {
+  --font-heading: "Space Grotesk", "Helvetica Neue", sans-serif !important;
+  --font-body:    "Space Grotesk", "Helvetica Neue", sans-serif !important;
+  --font-code:    "JetBrains Mono", "Courier New", monospace !important;
+  --radius: 0.2rem !important;
+}
+
+/* ─── Scanline effect on the header only (subtle) ────────────────────────── */
+header {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 4px
+  ) !important;
+}
+
+/* ─── Heading font ────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Space Grotesk", sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Code blocks — cockpit terminal style ───────────────────────────────── */
+pre, code {
+  font-family: "JetBrains Mono", monospace !important;
+  letter-spacing: 0.02em;
+}
+
+/* ─── FIDS Board — used on the welcome page ──────────────────────────────── */
+.fids-board {
+  border: 1px solid var(--accent-primary, #f5b800);
+  border-radius: 0.3rem;
+  overflow: hidden;
+  margin: 2rem 0;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.fids-board-header {
+  background: var(--accent-primary, #f5b800);
+  color: #060b18;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.fids-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+}
+
+.fids-live::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #060b18;
+  animation: fids-pulse 2s ease-in-out infinite;
+}
+
+@keyframes fids-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+.fids-col-headers {
+  display: grid;
+  grid-template-columns: 100px 1fr 220px 140px 100px;
+  gap: 0;
+  padding: 8px 20px;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-primary, #f5b800);
+  opacity: 0.6;
+  border-bottom: 1px solid rgba(245, 184, 0, 0.15);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+}
+
+.fids-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 220px 140px 100px;
+  gap: 0;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(26, 39, 68, 0.6);
+  align-items: center;
+  transition: background 0.1s;
+}
+
+.fids-row:last-child { border-bottom: none; }
+
+.fids-row:hover {
+  background: rgba(245, 184, 0, 0.04);
+}
+
+.fids-method {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #38bdf8;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.fids-path {
+  font-size: 0.85rem;
+  color: var(--accent-primary, #f5b800);
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.5px;
+}
+
+.fids-desc {
+  font-size: 0.8rem;
+  color: rgba(217, 200, 150, 0.7);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.fids-auth {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: rgba(148, 163, 184, 0.6);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.fids-status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.fids-status-badge.active    { color: #4ade80; }
+.fids-status-badge.beta      { color: #fb923c; }
+
+/* ─── Status reference table ─────────────────────────────────────────────── */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 1.5rem 0;
+}
+
+.status-card {
+  border: 1px solid;
+  border-radius: 0.3rem;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.status-card-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.status-card-content { flex: 1; }
+
+.status-card-name {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.status-card-desc {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  line-height: 1.4;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* individual status colors */
+.status-scheduled { color: #94a3b8; border-color: rgba(148,163,184,0.3); background: rgba(148,163,184,0.04); }
+.status-boarding  { color: #22d3ee; border-color: rgba(34,211,238,0.3);  background: rgba(34,211,238,0.04);  }
+.status-departed  { color: #60a5fa; border-color: rgba(96,165,250,0.3);  background: rgba(96,165,250,0.04);  }
+.status-in-flight { color: #38bdf8; border-color: rgba(56,189,248,0.3);  background: rgba(56,189,248,0.04);  }
+.status-landed    { color: #4ade80; border-color: rgba(74,222,128,0.3);  background: rgba(74,222,128,0.04);  }
+.status-arrived   { color: #86efac; border-color: rgba(134,239,172,0.3); background: rgba(134,239,172,0.04); }
+.status-delayed   { color: #fb923c; border-color: rgba(251,146,60,0.3);  background: rgba(251,146,60,0.04);  }
+.status-cancelled { color: #f87171; border-color: rgba(248,113,113,0.3); background: rgba(248,113,113,0.04); }
+
+/* ─── Airport-style section dividers ─────────────────────────────────────── */
+.runway-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2.5rem 0 1.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-primary, #f5b800);
+  opacity: 0.5;
+}
+
+.runway-divider::before,
+.runway-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+}
+
+/* ─── Code block enhancements ────────────────────────────────────────────── */
+pre {
+  border: 1px solid rgba(26, 39, 68, 0.8) !important;
+  border-radius: 0.25rem !important;
+}
+
+/* ─── Callout / Note overrides for aviation feel ──────────────────────────── */
+[data-callout-type="note"],
+[data-callout-type="info"] {
+  border-left-width: 3px !important;
+  border-radius: 0.25rem !important;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+[data-callout-type="warning"] {
+  border-left-width: 3px !important;
+  border-radius: 0.25rem !important;
+}
+
+/* ─── Welcome hero image wrapper ─────────────────────────────────────────── */
 .welcome-hero-tint {
   position: relative;
   display: block;
@@ -18,10 +265,55 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-color: var(--accent-9, var(--accent-primary));
+  background-color: var(--accent-primary, #f5b800);
   mix-blend-mode: color;
-  opacity: 0.5;
+  opacity: 0.4;
   pointer-events: none;
   border-radius: inherit;
   z-index: 1;
+}
+
+/* ─── Endpoint card grid ──────────────────────────────────────────────────── */
+.endpoint-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 1.5rem 0;
+}
+
+.endpoint-card {
+  border: 1px solid rgba(26, 39, 68, 0.8);
+  border-radius: 0.3rem;
+  padding: 20px;
+  transition: border-color 0.15s, background 0.15s;
+  text-decoration: none;
+  display: block;
+}
+
+.endpoint-card:hover {
+  border-color: var(--accent-primary, #f5b800);
+  background: rgba(245, 184, 0, 0.04);
+}
+
+.endpoint-card-method {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #38bdf8;
+  margin-bottom: 6px;
+}
+
+.endpoint-card-path {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1rem;
+  color: var(--accent-primary, #f5b800);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.endpoint-card-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  opacity: 0.7;
 }

@@ -2,82 +2,97 @@
 
 instances:
   - url: flight-status.docs.buildwithfern.com
-title: Flight Status | Documentation
+
+title: FIDS API
+
 layout:
   searchbar-placement: header
   page-width: full
   tabs-placement: header
+  content-alignment: left
+
 tabs:
   home:
-    display-name: Docs
-    icon: home
-  API Reference:
+    display-name: Overview
+    icon: fa-duotone fa-tower-control
+  api:
     display-name: API Reference
-    icon: puzzle
+    icon: fa-duotone fa-code
+
 navigation:
   - tab: home
     layout:
-      - section: Get started
+      - section: Getting Started
         contents:
           - page: Welcome
             path: docs/pages/welcome.mdx
-            icon: fa-duotone fa-house
-          - page: Edit your docs
-            path: docs/pages/editing-your-docs.mdx
-            icon: fa-duotone fa-pen-to-square
-          - page: Write content
-            path: docs/pages/writing-content.mdx
-            icon: fa-duotone fa-file-lines
-          - page: Set up navigation
-            path: docs/pages/navigation.mdx
-            icon: fa-duotone fa-sitemap
-          - page: Customize your docs
-            path: docs/pages/customization.mdx
-            icon: fa-duotone fa-palette
-          - page: Support
-            path: docs/pages/support.mdx
-            icon: fa-duotone fa-headset
-      - section: Changelog
-        contents:
-          - changelog: docs/changelog
-  - tab: API Reference
+            icon: fa-duotone fa-plane-departure
+          - page: Quick Start
+            path: docs/pages/quickstart.mdx
+            icon: fa-duotone fa-bolt
+          - page: Flight Statuses
+            path: docs/pages/flight-statuses.mdx
+            icon: fa-duotone fa-signal-bars
+
+  - tab: api
     layout:
       - section: Overview
         contents:
-          - page: API reference
+          - page: API Overview
             path: docs/pages/api-reference-overview.mdx
-            icon: fa-duotone fa-book
+            icon: fa-duotone fa-book-open
       - api: Flights API
         slug: flights-api
         flattened: true
+
 navbar-links:
+  - type: minimal
+    text: Live Board
+    url: https://api.cointet.com/web/index.html
   - type: filled
-    text: Edit
-    url: https://dashboard.buildwithfern.com
+    text: Try the API
+    url: https://api.cointet.com/flights
+
 colors:
   accent-primary:
-    light: "#020202"
-    dark: "#DEBC4A"
+    dark: "#f5b800"
+    light: "#b8860b"
   background:
-    light: "#FFFFFF"
-    dark: "#111113"
+    dark: "#060b18"
+    light: "#f5f2e8"
   border:
-    light: "#E5E7EB"
-    dark: "#222325"
+    dark: "#1a2744"
+    light: "#d4c88c"
+  card-background:
+    dark: "#0d1626"
+    light: "#ffffff"
+  sidebar-background:
+    dark: "#080f1e"
+    light: "#ede9d8"
+  header-background:
+    dark: "#0d1626"
+    light: "#ede9d8"
+
 theme:
   page-actions: toolbar
   footer-nav: minimal
+
 logo:
   dark: docs/assets/logo-dark.svg
-  light: docs/assets/logo.svg
-  height: 20
+  light: docs/assets/logo-light.svg
+  height: 26
+
 favicon: docs/assets/favicon.svg
+
 css:
   - styles.css
-  - docs/assets/onboarding-theme.css
+
 typography:
   headingsFont:
-    name: Inter
+    name: Space Grotesk
   bodyFont:
     name: Inter
+  codeFont:
+    name: JetBrains Mono
+
 ai-search: {}
