@@ -1,12 +1,52 @@
 ---
 title: FIDS API
-subtitle: Real-time flight status data — query active flights, track delays, and retrieve full departure & arrival details.
 slug: welcome
 hide-page-actions: true
-hide-nav-links: false
+hide-nav-links: true
 hide-feedback: true
-layout: overview
 ---
+
+<div className="vitrine-hero">
+  <img
+    src="../assets/plane-mode.webp"
+    className="vitrine-hero-img"
+    alt="Airplane Mode — FIDS API"
+  />
+  <div className="vitrine-hero-overlay" />
+  <div className="vitrine-hero-content">
+    <div className="vitrine-eyebrow">Real-time Flight Status API</div>
+    <h1 className="vitrine-title">Every flight.<br/>One API.</h1>
+    <p className="vitrine-subtitle">
+      Query active flights across any airport, track delays in real time,
+      and retrieve full departure & arrival details — gate, terminal, aircraft included.
+    </p>
+    <div className="vitrine-actions">
+      <a href="/quickstart" className="vitrine-btn vitrine-btn-primary">Quick Start →</a>
+      <a href="/flights-api" className="vitrine-btn vitrine-btn-ghost">API Reference</a>
+    </div>
+  </div>
+</div>
+
+<div className="vitrine-stats">
+  <div className="vitrine-stat">
+    <span className="vitrine-stat-value">2</span>
+    <span className="vitrine-stat-label">Endpoints</span>
+  </div>
+  <div className="vitrine-stat">
+    <span className="vitrine-stat-value">8</span>
+    <span className="vitrine-stat-label">Flight statuses</span>
+  </div>
+  <div className="vitrine-stat">
+    <span className="vitrine-stat-value">REST</span>
+    <span className="vitrine-stat-label">Protocol</span>
+  </div>
+  <div className="vitrine-stat">
+    <span className="vitrine-stat-value">JSON</span>
+    <span className="vitrine-stat-label">Response format</span>
+  </div>
+</div>
+
+<div className="vitrine-section-label">Endpoints</div>
 
 <div className="fids-board">
   <div className="fids-board-header">
@@ -23,74 +63,49 @@ layout: overview
   <div className="fids-row">
     <span className="fids-method">GET</span>
     <span className="fids-path">/flights</span>
-    <span className="fids-desc">List all active flights — filter by airport code</span>
+    <span className="fids-desc">List all active flights — filter by IATA airport code</span>
     <span className="fids-auth">Basic Auth</span>
     <span><span className="fids-status-badge active">ACTIVE</span></span>
   </div>
   <div className="fids-row">
     <span className="fids-method">GET</span>
     <span className="fids-path">/flights/{"{flightCode}"}</span>
-    <span className="fids-desc">Full details for a single flight</span>
+    <span className="fids-desc">Full details for a single flight by IATA code</span>
     <span className="fids-auth">Basic Auth</span>
     <span><span className="fids-status-badge active">ACTIVE</span></span>
   </div>
 </div>
 
-## Endpoints
+<div className="vitrine-section-label" style={{marginTop: "2.5rem"}}>What you get</div>
 
-<CardGroup cols={2}>
-  <Card title="GET /flights" icon="fa-duotone fa-plane" href="/flights-api/get-flights">
-    Returns a list of all currently active flights. Filter results by IATA airport code using the `?airport=` query parameter.
-  </Card>
-  <Card title="GET /flights/{flightCode}" icon="fa-duotone fa-magnifying-glass" href="/flights-api/get-flight-by-flight-code">
-    Returns full departure, arrival, aircraft, and status details for a specific flight identified by its IATA code (e.g. `AF011`).
-  </Card>
-</CardGroup>
+<div className="vitrine-features">
+  <div className="vitrine-feature">
+    <span className="vitrine-feature-icon">🛫</span>
+    <div className="vitrine-feature-title">Real-time Status</div>
+    <div className="vitrine-feature-desc">8 operational statuses from <code>scheduled</code> to <code>cancelled</code>. Always know where a flight stands.</div>
+  </div>
+  <div className="vitrine-feature">
+    <span className="vitrine-feature-icon">🗺️</span>
+    <div className="vitrine-feature-title">Airport Filtering</div>
+    <div className="vitrine-feature-desc">Pass any IATA code — <code>CDG</code>, <code>JFK</code>, <code>FCO</code> — to filter flights by origin or destination.</div>
+  </div>
+  <div className="vitrine-feature">
+    <span className="vitrine-feature-icon">📋</span>
+    <div className="vitrine-feature-title">Full Flight Data</div>
+    <div className="vitrine-feature-desc">Gate, terminal, aircraft type, delay minutes, actual vs. scheduled times — everything in one response.</div>
+  </div>
+</div>
 
-## Quick Start
+<div className="vitrine-section-label">Quick start</div>
 
-<Steps>
-<Step title="Authenticate">
-
-All requests require HTTP Basic Authentication. Pass your credentials with each request:
-
-```bash title="cURL"
-curl -u username:password https://api.cointet.com/flights
+```bash title="Your first request"
+curl -u user:pass https://api.cointet.com/flights?airport=CDG
 ```
 
-</Step>
-<Step title="List active flights">
-
-Fetch all currently tracked flights:
-
-```bash title="All flights"
-curl -u username:password https://api.cointet.com/flights
-```
-
-Filter by departure or arrival airport:
-
-```bash title="Filter by CDG"
-curl -u username:password "https://api.cointet.com/flights?airport=CDG"
-```
-
-</Step>
-<Step title="Retrieve flight details">
-
-Use the IATA flight code to get full details — times, gate, terminal, delay:
-
-```bash title="Flight AF011"
-curl -u username:password https://api.cointet.com/flights/AF011
-```
-
-</Step>
-</Steps>
-
-## Base URL
-
-```
-https://api.cointet.com
+```bash title="Retrieve a specific flight"
+curl -u user:pass https://api.cointet.com/flights/AF011
 ```
 
 <Note>
-All endpoints return `application/json`. Date-time values are ISO 8601 UTC strings (e.g. `2026-11-23T08:30:00Z`).
+All endpoints return `application/json`. Timestamps are ISO 8601 UTC — e.g. `2026-11-23T08:30:00Z`. See the [Quick Start](/quickstart) guide for full examples in curl, Python, and JavaScript.
 </Note>

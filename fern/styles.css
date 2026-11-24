@@ -247,7 +247,236 @@ pre {
   border-radius: 0.25rem !important;
 }
 
-/* ─── Welcome hero image wrapper ─────────────────────────────────────────── */
+/* ─── Vitrine Hero ────────────────────────────────────────────────────────── */
+.vitrine-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  margin-bottom: 2.5rem;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.vitrine-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+  margin: 0 !important;
+  z-index: 0;
+}
+
+/* Vignette: transparent center (shows the orange plane icon), dark edges + strong bottom fade */
+.vitrine-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      rgba(6,11,24,0.55) 0%,
+      rgba(6,11,24,0.1)  28%,
+      rgba(6,11,24,0.0)  45%,
+      rgba(6,11,24,0.55) 68%,
+      rgba(6,11,24,0.97) 90%,
+      #060b18            100%
+    ),
+    linear-gradient(to right,
+      rgba(6,11,24,0.6) 0%,
+      transparent        20%,
+      transparent        80%,
+      rgba(6,11,24,0.6) 100%
+    );
+}
+
+.vitrine-hero-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 48px 48px;
+  width: 100%;
+  max-width: 640px;
+}
+
+.vitrine-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-primary, #f5b800);
+  margin-bottom: 14px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.vitrine-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent-primary, #f5b800);
+}
+
+.vitrine-title {
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: 3.6rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: #ffffff !important;
+  line-height: 1.0 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+.vitrine-subtitle {
+  font-size: 1.05rem;
+  color: rgba(217,200,150,0.75);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  max-width: 460px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.vitrine-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.vitrine-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none !important;
+  border-radius: 0.25rem;
+  transition: all 0.14s;
+  font-family: "Space Grotesk", sans-serif;
+  cursor: pointer;
+}
+
+.vitrine-btn-primary {
+  background: var(--accent-primary, #f5b800);
+  color: #060b18 !important;
+  border: 1px solid var(--accent-primary, #f5b800);
+}
+
+.vitrine-btn-primary:hover {
+  background: #d4a000;
+  border-color: #d4a000;
+}
+
+.vitrine-btn-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.vitrine-btn-ghost:hover {
+  border-color: var(--accent-primary, #f5b800);
+  color: var(--accent-primary, #f5b800) !important;
+}
+
+/* ─── Stats strip ─────────────────────────────────────────────────────────── */
+.vitrine-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid rgba(26,39,68,0.9);
+  border-radius: 0.3rem;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.vitrine-stat {
+  padding: 22px 20px;
+  text-align: center;
+  border-right: 1px solid rgba(26,39,68,0.9);
+  background: rgba(13,22,38,0.5);
+}
+
+.vitrine-stat:last-child { border-right: none; }
+
+.vitrine-stat-value {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent-primary, #f5b800);
+  line-height: 1;
+  margin-bottom: 7px;
+}
+
+.vitrine-stat-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(90,78,46,0.9);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* ─── Feature cards ───────────────────────────────────────────────────────── */
+.vitrine-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 1rem 0 2.5rem;
+}
+
+.vitrine-feature {
+  border: 1px solid rgba(26,39,68,0.9);
+  border-radius: 0.3rem;
+  padding: 22px 20px;
+  background: rgba(13,22,38,0.4);
+  transition: border-color 0.14s;
+}
+
+.vitrine-feature:hover {
+  border-color: rgba(245,184,0,0.35);
+}
+
+.vitrine-feature-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  display: block;
+  line-height: 1;
+}
+
+.vitrine-feature-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.vitrine-feature-desc {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(217,200,150,0.6);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* ─── Section label ───────────────────────────────────────────────────────── */
+.vitrine-section-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(90,78,46,0.7);
+  margin-bottom: 1rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* ─── Welcome hero image wrapper (legacy) ─────────────────────────────────── */
 .welcome-hero-tint {
   position: relative;
   display: block;
@@ -271,6 +500,15 @@ pre {
   pointer-events: none;
   border-radius: inherit;
   z-index: 1;
+}
+
+/* Mobile responsiveness for vitrine */
+@media (max-width: 768px) {
+  .vitrine-hero { min-height: 420px; }
+  .vitrine-hero-content { padding: 0 24px 36px; }
+  .vitrine-title { font-size: 2.4rem !important; }
+  .vitrine-stats { grid-template-columns: repeat(2, 1fr); }
+  .vitrine-features { grid-template-columns: 1fr; }
 }
 
 /* ─── Endpoint card grid ──────────────────────────────────────────────────── */
